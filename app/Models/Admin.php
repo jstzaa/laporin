@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Aspirasi;
+
+class Admin extends Model
+{
+    // Inisialisasi Tabel
+    protected $table = 'admin';
+
+    // Inisialisasi Primary Key
+    protected $primaryKey = 'id_admin';
+
+    // Inisialisasi Guarded
+    protected $guarded = ['id_admin'];
+
+    // Relasi ke tabel aspirasi
+    public function aspirasi(): HasMany
+    {
+        return $this->hasMany(Aspirasi::class, 'id_admin', 'id_admin');
+    }
+}

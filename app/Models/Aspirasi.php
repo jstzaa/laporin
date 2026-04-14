@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Kategori;
+use App\Models\Admin;
+
+class Aspirasi extends Model
+{
+    // Inisialisasi Tabel
+    protected $table = 'aspirasi';
+
+    // Inisialisasi Primary Key
+    protected $primaryKey = 'id_aspirasi';
+
+    // Inisialisasi Guarded
+    protected $guarded = ['id_aspirasi'];
+
+    // Relasi ke tabel kategori
+    public function kategori(): BelongsTo
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori','id_kategori');
+    }
+
+    // Relasi ke tabel admin
+    public function admin(): BelongsTo
+    {
+        return $this->belongsTo(Admin::class, 'id_admin','id_admin');
+    }
+}
