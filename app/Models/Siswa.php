@@ -9,7 +9,7 @@ use App\Models\InputAspirasi;
 class Siswa extends Model
 {
     // Inisialisasi Tabel
-    protected $table = 'siswa';
+    protected $table = 'siswas';
 
     // Inisialisasi Primary Key
     protected $primaryKey = 'id_siswa';

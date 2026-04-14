@@ -22,6 +22,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string('lokasi');
             $table->string('keterangan');
+            $table->timestamps();
         });
     }
 

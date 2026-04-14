@@ -9,7 +9,7 @@ use App\Models\Aspirasi;
 class Admin extends Model
 {
     // Inisialisasi Tabel
-    protected $table = 'admin';
+    protected $table = 'admins';
 
     // Inisialisasi Primary Key
     protected $primaryKey = 'id_admin';

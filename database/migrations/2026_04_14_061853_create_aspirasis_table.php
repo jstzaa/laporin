@@ -22,6 +22,7 @@ return new class extends Migration
                 ->constrained('kategoris', 'id_kategori')
                 ->cascadeOnDelete();
             $table->integer('feedback');
+            $table->timestamps();
         });
     }
 

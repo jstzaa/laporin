@@ -10,7 +10,7 @@ use App\Models\InputAspirasi;
 class Kategori extends Model
 {
     // Inisialisasi Tabel
-    protected $table = 'kategori';
+    protected $table = 'kategoris';
 
     // Inisialisasi Primary Key
     protected $primaryKey = 'id_kategori';
