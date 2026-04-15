@@ -29,6 +29,7 @@
             </button>
         </form>
     </div>
+    <!-- SUCCESS MESSAGE -->
     @if (session('success'))
         <div id="alert-success" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
             <strong class="font-bold">Berhasil!</strong>
@@ -52,9 +53,8 @@
                     <th class="px-6 py-3 text-left">Aksi</th>
                 </tr>
             </thead>
-            <!-- BODY (DUMMY DATA) -->
+            <!-- BODY -->
             <tbody class="divide-y">
-                <!-- ROW 1 -->
                 @foreach ($kategori as $item)
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 font-medium text-gray-800">
@@ -63,11 +63,31 @@
                         <td class="px-6 py-4 font-medium text-gray-800">
                             {{ $item->ket_kategori }}
                         </td>
-                        <td class="px-6 py-4 flex gap-2">
-                            <button class="bg-yellow-500 text-white px-3 py-1 rounded text-xs hover:bg-yellow-600">
+                        <td class="px-6 py-4 flex gap-2"
+                            x-data="{ 
+                                openEdit: false, 
+                                openDelete: false,
+                                kategoriId: '{{ $item->id_kategori }}',
+                                kategoriNama: '{{ $item->ket_kategori }}'
+                            }">
+
+                            <!-- Button Edit -->
+                            <button 
+                                @click="$dispatch('open-edit', { 
+                                    id: '{{ $item->id_kategori }}', 
+                                    nama: '{{ $item->ket_kategori }}' 
+                                })"
+                                class="bg-yellow-500 text-white px-3 py-1 rounded text-xs hover:bg-yellow-600">
                                 Edit
                             </button>
-                            <button class="bg-red-500 text-white px-3 py-1 rounded text-xs hover:bg-red-600">
+
+                            <!-- Button Hapus -->
+                            <button 
+                                @click="$dispatch('open-delete', { 
+                                    id: '{{ $item->id_kategori }}', 
+                                    nama: '{{ $item->ket_kategori }}' 
+                                })"
+                                class="bg-red-500 text-white px-3 py-1 rounded text-xs hover:bg-red-600">
                                 Hapus
                             </button>
                         </td>
@@ -75,6 +95,120 @@
                 @endforeach
             </tbody>
         </table>
+        <!-- MODAL EDIT -->
+        <div 
+            x-data="{ 
+                open: false, 
+                id: null, 
+                nama: '' 
+            }"
+            x-show="open"
+            x-transition
+            x-transition.duration.300ms
+            x-cloak
+            @open-edit.window="
+                open = true;
+                id = $event.detail.id;
+                nama = $event.detail.nama;
+            "
+            class="fixed inset-0 flex items-center justify-center bg-transparent z-50"
+        >
+            <div 
+                @click.away="open = false"
+                class="bg-white rounded-xl shadow-lg w-full max-w-md p-6"
+            >
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">
+                    Edit Kategori
+                </h2>
+
+                <!-- Form (Action dan method silakan disesuaikan) -->
+                <form>
+                    <input type="hidden" name="id_kategori" :value="id">
+
+                    <div class="mb-4">
+                        <label class="block text-sm text-gray-600 mb-1">
+                            Nama Kategori
+                        </label>
+                        <input 
+                            type="text" 
+                            name="ket_kategori"
+                            x-model="nama"
+                            class="w-full shadow-lg rounded-lg px-4 py-2"
+                            placeholder="Masukkan nama kategori"
+                        >
+                    </div>
+
+                    <div class="flex justify-end gap-2">
+                        <button 
+                            type="button" 
+                            @click="open = false"
+                            class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
+                        >
+                            Batal
+                        </button>
+                        <button 
+                            type="submit"
+                            class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+                        >
+                            Edit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- MODAL HAPUS -->
+        <div 
+            x-data="{ 
+                open: false, 
+                id: null, 
+                nama: '' 
+            }"
+            x-show="open"
+            x-transition
+            x-transition.duration.300ms
+            x-cloak
+            @open-delete.window="
+                open = true;
+                id = $event.detail.id;
+                nama = $event.detail.nama;
+            "
+            class="fixed inset-0 flex items-center justify-center bg-transparent z-50"
+        >
+            <div 
+                @click.away="open = false"
+                class="bg-white rounded-xl shadow-lg w-full max-w-md p-6"
+            >
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">
+                    Hapus Kategori
+                </h2>
+
+                <p class="text-sm text-gray-600 mb-6">
+                    Apakah Anda yakin ingin menghapus kategori 
+                    <span class="font-semibold" x-text="nama"></span>?
+                </p>
+
+                <!-- Form (Action dan method silakan disesuaikan) -->
+                <form>
+                    <input type="hidden" name="id_kategori" :value="id">
+
+                    <div class="flex justify-end gap-2">
+                        <button 
+                            type="button" 
+                            @click="open = false"
+                            class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
+                        >
+                            Batal
+                        </button>
+                        <button 
+                            type="submit"
+                            class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                        >
+                            Hapus
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
