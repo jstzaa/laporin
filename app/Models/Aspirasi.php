@@ -15,8 +15,10 @@ class Aspirasi extends Model
     // Inisialisasi Primary Key
     protected $primaryKey = 'id_aspirasi';
 
-    // Inisialisasi Guarded
-    protected $guarded = ['id_aspirasi'];
+    // Inisialisasi Fillable
+    protected $fillable = [
+        'status', 'id_admin', 'id_kategori', 'feedback'
+    ];
 
     // Relasi ke tabel kategori
     public function kategori(): BelongsTo

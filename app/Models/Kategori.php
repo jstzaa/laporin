@@ -15,8 +15,8 @@ class Kategori extends Model
     // Inisialisasi Primary Key
     protected $primaryKey = 'id_kategori';
 
-    // Inisialisasi Guarded
-    protected $guarded = ['id_kategori'];
+    // Inisialisasi Fillable
+    protected $fillable = ['ket_kategori'];
 
     // Relasi ke tabel input aspirasi
     public function inputAspirasi(): HasMany

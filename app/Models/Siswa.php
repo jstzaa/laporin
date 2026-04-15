@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\InputAspirasi;
@@ -15,8 +15,13 @@ class Siswa extends Authenticatable
     // Inisialisasi Primary Key
     protected $primaryKey = 'id_siswa';
 
-    // Inisialisasi Guarded
-    protected $guarded = ['id_siswa'];
+    // Inisialisasi Fillable
+    protected $fillable = ['nama_siswa', 'nis', 'password', 'kelas'];
+    protected $hidden = ['password'];
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+    protected $guard = 'siswa';
 
     // Relasi ke tabel input aspirasi
     public function inputAspirasi(): HasMany

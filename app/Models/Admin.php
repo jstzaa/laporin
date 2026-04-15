@@ -15,8 +15,13 @@ class Admin extends Authenticatable
     // Inisialisasi Primary Key
     protected $primaryKey = 'id_admin';
 
-    // Inisialisasi Guarded
-    protected $guarded = ['id_admin'];
+    // Inisialisasi Fillable
+    protected $fillable = ['username', 'password'];
+    protected $hidden = ['password'];
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+    protected $guard = 'admin';
 
     // Relasi ke tabel aspirasi
     public function aspirasi(): HasMany

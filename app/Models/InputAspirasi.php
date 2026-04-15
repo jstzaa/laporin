@@ -15,8 +15,8 @@ class InputAspirasi extends Model
     // Inisialisasi Primary Key
     protected $primaryKey = 'id_pelaporan';
 
-    // Inisialisasi Guarded
-    protected $guarded = ['id_pelaporan'];
+    // Inisialisasi Fillable
+    protected $fillable = ['id_siswa','id_kategori','lokasi','keterangan'];
 
     // Relasi ke tabel siswa
     public function siswa(): BelongsTo
