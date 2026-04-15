@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Siswa;
+use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,10 +10,14 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth:admin')->group(function(){
-    Route::get('/admin/home', [AdminController::class, 'index'])->name('show.home.admin');
+    Route::get('/admin/home', [Admin\AspirasiController::class, 'index'])->name('show.home.admin');
+    Route::get('/admin/kategori', [Admin\KategoriController::class, 'index'])->name('show.kategori');
+    Route::post('/admin/kategori', [Admin\KategoriController::class, 'store'])->name('kategori');
+    Route::get('/admin/daftar-siswa', [Admin\SiswaController::class, 'index'])->name('show.siswa');
+    Route::get('/admin/daftar-admin', [Admin\AdminManageController::class, 'index'])->name('show.admin');
 });
 Route::middleware('auth:siswa')->group(function(){
-    Route::get('/siswa/home', [SiswaController::class, 'index'])->name('show.home.siswa');
+    Route::get('/siswa/home', [Siswa\AspirasiController::class, 'index'])->name('show.home.siswa');
 });
     
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');

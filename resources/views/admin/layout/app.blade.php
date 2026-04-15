@@ -9,7 +9,7 @@
 </head>
 <body>
     @include('admin.layout.navbar')
-    <main class="my-36 mx-20 flex flex-col justify-center items-center">
+    <main class="flex flex-col justify-center items-center">
         @yield('content')
     </main>
 </body>

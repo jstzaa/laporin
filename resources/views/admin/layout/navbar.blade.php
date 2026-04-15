@@ -6,23 +6,23 @@
                     A
                 </div>
                 <span class="text-lg font-bold text-gray-800">
-                    Admin Panel
+                    Aplikasi Pengaduan
                 </span>
             </div>
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="{{ url('/admin/pengaduan') }}"
+                <a href="{{ route('show.home.admin') }}"
                    class="text-gray-600 hover:text-blue-600 transition duration-200">
                     Daftar Aduan
                 </a>
-                <a href="{{ url('/admin/kategori') }}"
+                <a href="{{ route('show.kategori') }}"
                    class="text-gray-600 hover:text-blue-600 transition duration-200">
                     Kategori
                 </a>
-                <a href="{{ url('/admin/siswa') }}"
+                <a href="{{ route('show.siswa') }}"
                    class="text-gray-600 hover:text-blue-600 transition duration-200">
                     Siswa
                 </a>
-                <a href="{{ url('/admin/admin') }}"
+                <a href="{{ route('show.admin') }}"
                    class="text-gray-600 hover:text-blue-600 transition duration-200">
                     Admin
                 </a>
@@ -30,7 +30,7 @@
             <div class="flex items-center space-x-4">
                 <div class="text-sm text-gray-500 hidden sm:block">
                     Halo, 
-                    @auth
+                    @auth('admin')
                         <span>{{ Auth::guard('admin')->user()->username }}</span>
                     @endauth
                 </div>

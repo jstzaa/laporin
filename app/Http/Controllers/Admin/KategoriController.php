@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Kategori;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -12,7 +13,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        $kategori = Kategori::select('id_kategori', 'ket_kategori')->orderBy('ket_kategori', 'asc')->get();
+        return view('admin.pages.kategori', compact('kategori'));
     }
 
     /**
@@ -20,7 +22,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -28,7 +30,15 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ket_kategori' => 'required'
+        ]);
+
+        Kategori::create([
+            'ket_kategori' => $request->ket_kategori
+        ]);
+
+        return redirect()->route('kategori')->with('success','Kategori berhasil ditambahkan!');
     }
 
     /**
@@ -36,7 +46,7 @@ class KategoriController extends Controller
      */
     public function show(Kategori $kategori)
     {
-        //
+        
     }
 
     /**

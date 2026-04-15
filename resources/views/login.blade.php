@@ -20,8 +20,11 @@
                     name="username"
                     required
                     class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Masukkan NIS"
+                    placeholder="Masukkan username"
                 >
+                @error('login')
+                    <span>Username atau password salah!</span>
+                @enderror
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Password</label>

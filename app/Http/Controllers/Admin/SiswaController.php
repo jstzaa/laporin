@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Aspirasi;
+use App\Models\Siswa;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AspirasiController extends Controller
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('admin.pages.siswa');
     }
 
     /**
@@ -34,7 +35,7 @@ class AspirasiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Aspirasi $aspirasi)
+    public function show(Siswa $siswa)
     {
         //
     }
@@ -42,7 +43,7 @@ class AspirasiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Aspirasi $aspirasi)
+    public function edit(Siswa $siswa)
     {
         //
     }
@@ -50,7 +51,7 @@ class AspirasiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Aspirasi $aspirasi)
+    public function update(Request $request, Siswa $siswa)
     {
         //
     }
@@ -58,7 +59,7 @@ class AspirasiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Aspirasi $aspirasi)
+    public function destroy(Siswa $siswa)
     {
         //
     }

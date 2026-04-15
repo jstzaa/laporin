@@ -1,0 +1,86 @@
+@extends('admin.layout.app')
+
+@section('content')
+<div class="max-w-6xl mx-auto p-6 space-y-6">
+    <!-- TITLE -->
+    <div>
+        <h1 class="text-2xl font-bold text-gray-800">
+            Manajemen Admin
+        </h1>
+        <p class="text-sm text-gray-500">
+            Kelola akun admin sistem
+        </p>
+    </div>
+    <!-- FORM TAMBAH ADMIN -->
+    <div class="bg-white p-5 rounded-xl shadow">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">
+            Tambah Admin
+        </h2>
+        <form class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <!-- USERNAME -->
+            <input type="text"
+                placeholder="Username admin"
+                class="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
+            <!-- PASSWORD -->
+            <input type="password"
+                placeholder="Password"
+                class="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
+            <!-- BUTTON -->
+            <button type="button"
+                class="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 transition">
+                Simpan
+            </button>
+        </form>
+    </div>
+    <!-- TABLE ADMIN -->
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+        <table class="w-full text-sm">
+            <!-- HEADER -->
+            <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+                <tr>
+                    <th class="px-6 py-3 text-left">Username</th>
+                    <th class="px-6 py-3 text-left">Password</th>
+                    <th class="px-6 py-3 text-left">Aksi</th>
+                </tr>
+            </thead>
+            <!-- BODY DUMMY -->
+            <tbody class="divide-y">
+                <!-- ROW 1 -->
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 font-medium text-gray-800">
+                        admin1
+                    </td>
+                    <td class="px-6 py-4 text-gray-500">
+                        ********
+                    </td>
+                    <td class="px-6 py-4 flex gap-2">
+                        <button class="bg-yellow-500 text-white px-3 py-1 rounded text-xs hover:bg-yellow-600">
+                            Edit
+                        </button>
+                        <button class="bg-red-500 text-white px-3 py-1 rounded text-xs hover:bg-red-600">
+                            Hapus
+                        </button>
+                    </td>
+                </tr>
+                <!-- ROW 2 -->
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 font-medium text-gray-800">
+                        admin2
+                    </td>
+                    <td class="px-6 py-4 text-gray-500">
+                        ********
+                    </td>
+                    <td class="px-6 py-4 flex gap-2">
+                        <button class="bg-yellow-500 text-white px-3 py-1 rounded text-xs hover:bg-yellow-600">
+                            Edit
+                        </button>
+                        <button class="bg-red-500 text-white px-3 py-1 rounded text-xs hover:bg-red-600">
+                            Hapus
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection
