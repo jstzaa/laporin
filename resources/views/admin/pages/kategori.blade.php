@@ -21,10 +21,10 @@
             <!-- INPUT NAMA -->
             <input type="text" name="ket_kategori" required
                 placeholder="Nama kategori..."
-                class="flex-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
+                class="flex-1 shadow-lg rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
             <!-- BUTTON SIMPAN -->
             <button type="submit"
-                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                class="bg-blue-600 shadow-lg text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
                 Simpan
             </button>
         </form>

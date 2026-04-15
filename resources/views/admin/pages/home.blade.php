@@ -1,7 +1,7 @@
 @extends('admin.layout.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto p-6 space-y-6">
+<div class="w-5xl mx-auto p-6 space-y-6">
     <!-- TITLE -->
     <div>
         <h1 class="text-2xl font-bold text-gray-800">
@@ -18,12 +18,12 @@
             <div>
                 <label class="text-sm text-gray-600">Tanggal</label>
                 <input type="date"
-                    class="w-full mt-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                    class="w-full mt-1 shadow-lg rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
             </div>
             <!-- Kategori -->
             <div>
                 <label class="text-sm text-gray-600">Kategori</label>
-                <select class="w-full mt-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                <select class="w-full mt-1 shadow-lg rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
                     <option>Semua Kategori</option>
                     <option>Fasilitas</option>
                     <option>Akademik</option>
@@ -32,7 +32,7 @@
             </div>
             <!-- Button -->
             <div class="flex items-end">
-                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                <button class="w-full shadow-lg bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
                     Filter
                 </button>
             </div>

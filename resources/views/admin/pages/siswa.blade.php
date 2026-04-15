@@ -1,7 +1,7 @@
 @extends('admin.layout.app')
 
 @section('content')
-<div class="max-w-6xl mx-auto p-6 space-y-6">
+<div class="w-5xl mx-auto p-6 space-y-6">
     <!-- TITLE -->
     <div>
         <h1 class="text-2xl font-bold text-gray-800">
@@ -20,18 +20,18 @@
             <!-- NAMA -->
             <input type="text"
                 placeholder="Nama siswa"
-                class="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
+                class="shadow-lg rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
             <!-- NIS -->
             <input type="text"
                 placeholder="NIS"
-                class="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
+                class="shadow-lg rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
             <!-- PASSWORD (AUTO GENERATED / INPUT OPTIONAL) -->
             <input type="text"
                 placeholder="Password"
-                class="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
+                class="shadow-lg rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
             <!-- BUTTON -->
             <button type="button"
-                class="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 transition">
+                class="bg-blue-600 shadow-lg text-white rounded-lg px-4 py-2 hover:bg-blue-700 transition">
                 Simpan
             </button>
         </form>
@@ -47,7 +47,6 @@
                 <tr>
                     <th class="px-6 py-3 text-left">Nama</th>
                     <th class="px-6 py-3 text-left">NIS</th>
-                    <th class="px-6 py-3 text-left">Password</th>
                     <th class="px-6 py-3 text-left">Aksi</th>
                 </tr>
             </thead>
@@ -61,14 +60,10 @@
                     <td class="px-6 py-4 text-gray-600">
                         12345
                     </td>
-                    <td class="px-6 py-4 text-gray-500">
-                        ********
-                    </td>
                     <td class="px-6 py-4 flex gap-2">
                         <button class="bg-yellow-500 text-white px-3 py-1 rounded text-xs hover:bg-yellow-600">
                             Edit
                         </button>
-
                         <button class="bg-red-500 text-white px-3 py-1 rounded text-xs hover:bg-red-600">
                             Hapus
                         </button>
@@ -81,9 +76,6 @@
                     </td>
                     <td class="px-6 py-4 text-gray-600">
                         67890
-                    </td>
-                    <td class="px-6 py-4 text-gray-500">
-                        ********
                     </td>
                     <td class="px-6 py-4 flex gap-2">
                         <button class="bg-yellow-500 text-white px-3 py-1 rounded text-xs hover:bg-yellow-600">
