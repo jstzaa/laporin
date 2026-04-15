@@ -12,11 +12,15 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100">
     @include('admin.layout.navbar')
-    <main class="flex flex-col justify-center items-center">
+
+    <!-- Main Content -->
+    <main class="min-h-screen pt-20 px-4 sm:px-6 lg:px-8">
         @yield('content')
     </main>
+
+    <!-- AlpineJS -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>
 </html>
