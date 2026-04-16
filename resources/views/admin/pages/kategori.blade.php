@@ -17,7 +17,7 @@
         <h2 class="text-base sm:text-lg font-semibold text-gray-700 mb-4">
             Tambah Kategori
         </h2>
-        <form method="POST" action="{{ route('kategori') }}" class="flex flex-col md:flex-row gap-3">
+        <form method="POST" action="{{ route('add.kategori') }}" class="flex flex-col md:flex-row gap-3">
             @csrf
             <!-- INPUT NAMA -->
             <input type="text" name="ket_kategori" required

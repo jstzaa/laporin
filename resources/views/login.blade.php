@@ -23,13 +23,14 @@
                 <input 
                     type="text" 
                     name="username"
+                    value="{{ old('username') }}"
                     required
                     class="mt-1 w-full px-4 py-2 text-sm shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Masukkan username"
                 >
                 @error('login')
                     <span class="text-xs sm:text-sm text-red-500 mt-1 block">
-                        Username atau password salah!
+                        {{ $message }}
                     </span>
                 @enderror
             </div>

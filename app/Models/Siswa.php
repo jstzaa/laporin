@@ -18,9 +18,6 @@ class Siswa extends Authenticatable
     // Inisialisasi Fillable
     protected $fillable = ['nama_siswa', 'nis', 'password', 'kelas'];
     protected $hidden = ['password'];
-    protected $casts = [
-        'password' => 'hashed',
-    ];
     protected $guard = 'siswa';
 
     // Relasi ke tabel input aspirasi

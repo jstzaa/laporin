@@ -14,7 +14,7 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori = Kategori::select('id_kategori', 'ket_kategori')->orderBy('ket_kategori', 'asc')->paginate(10);
-        
+
         return view('admin.pages.kategori', compact('kategori'));
     }
 
@@ -23,7 +23,7 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(['ket_kategori' => 'required']);
+        $validated = $request->validate(['ket_kategori' => 'required|max:255']);
 
         Kategori::create($validated);
 
@@ -35,7 +35,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id_kategori)
     {
-        $validated = $request->validate(['ket_kategori' => 'required']);
+        $validated = $request->validate(['ket_kategori' => 'required|max:255']);
 
         Kategori::findOrFail($id_kategori)->update($validated);
 
