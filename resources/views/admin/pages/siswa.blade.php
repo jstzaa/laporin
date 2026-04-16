@@ -116,7 +116,7 @@
                             </td>
 
                             {{-- Aksi --}}
-                            <td class="px-5 py-3.5" x-data="{ }">
+                            <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-2">
                                     <button 
                                         @click="$dispatch('open-edit', { 

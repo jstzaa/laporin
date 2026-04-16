@@ -16,7 +16,7 @@
     @include('admin.layout.sidebar')
 
     <!-- Main Content -->
-    <main class="min-h-screen mt-16 px-4 md:ml-64 sm:px-6 lg:px-8">
+    <main x-data="{}" class="min-h-screen mt-16 px-4 md:ml-64 sm:px-6 lg:px-8">
         @yield('content')
     </main>
 
