@@ -1,104 +1,141 @@
 @extends('admin.layout.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto p-4 sm:p-6 space-y-6">
-    <!-- TITLE -->
-    <div>
-        <h1 class="text-xl sm:text-2xl font-bold text-gray-800">
-            Manajemen Admin
-        </h1>
-        <p class="text-xs sm:text-sm text-gray-500">
-            Kelola akun admin sistem
-        </p>
+<div class="max-w-5xl mx-auto p-4 sm:p-6 space-y-6">
+
+    {{-- HEADER --}}
+    <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 shadow-md shadow-blue-200 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+            </svg>
+        </div>
+        <div>
+            <h1 class="text-xl font-extrabold text-gray-800 tracking-tight">Manajemen Admin</h1>
+            <p class="text-xs text-gray-400 font-medium">Kelola akun admin sistem</p>
+        </div>
     </div>
 
-    <!-- FORM TAMBAH ADMIN -->
-    <div class="bg-white p-4 sm:p-5 rounded-xl shadow">
-        <h2 class="text-base sm:text-lg font-semibold text-gray-700 mb-4">
-            Tambah Admin
-        </h2>
-        <form method="POST" action="{{ route('add.admin') }}" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+    {{-- FORM TAMBAH ADMIN --}}
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <div class="flex items-center space-x-2 mb-4">
+            <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
+            <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Tambah Admin Baru</h2>
+        </div>
+        <form method="POST" action="{{ route('add.admin') }}"
+              class="flex flex-col sm:flex-row gap-3">
             @csrf
-            <!-- USERNAME -->
             <input type="text" name="username"
-                placeholder="Username admin"
-                class="w-full shadow-lg rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
-
-            <!-- BUTTON -->
+                   placeholder="Masukkan username admin..."
+                   class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
+                          placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                          transition-all duration-150">
             <button type="submit"
-                class="w-full bg-blue-600 shadow-lg text-white rounded-lg px-4 py-2 hover:bg-blue-700 transition">
-                Simpan
+                    class="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700
+                           text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-blue-200
+                           transition-all duration-150 whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                <span>Tambah Admin</span>
             </button>
         </form>
     </div>
 
-    <!-- SUCCESS MESSAGE -->
+    {{-- SUCCESS ALERT --}}
     @if (session('success'))
-        <div id="alert-success" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative mb-4 text-sm" role="alert">
-            <strong class="font-bold">Berhasil!</strong>
-            <span class="block sm:inline">{{ session('success') }}</span>
+        <div id="alert-success"
+             class="flex items-center space-x-3 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl text-sm shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span><strong class="font-semibold">Berhasil!</strong> {{ session('success') }}</span>
         </div>
-
         <script>
-            setTimeout(() => {
-                document.getElementById('alert-success').remove();
-            }, 3000);
+            setTimeout(() => { document.getElementById('alert-success')?.remove(); }, 3000);
         </script>
     @endif
 
-    <!-- TABLE ADMIN -->
-    <div class="bg-white rounded-xl shadow overflow-hidden">
+    {{-- TABLE --}}
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+
+        {{-- Table Header Bar --}}
+        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+            <div class="flex items-center space-x-2">
+                <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
+                <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Daftar Admin</h2>
+            </div>
+            <span class="text-xs text-gray-400 font-medium">{{ $admin->total() }} akun terdaftar</span>
+        </div>
+
         <div class="overflow-x-auto">
-            <table class="w-full text-xs sm:text-sm">
-                <!-- HEADER -->
-                <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
-                    <tr>
-                        <th class="px-4 sm:px-6 py-3 text-left">No</th>
-                        <th class="px-4 sm:px-6 py-3 text-left">Username</th>
-                        <th class="px-4 sm:px-6 py-3 text-left">Aksi</th>
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-gradient-to-r from-gray-50 to-gray-100 text-gray-500 text-xs uppercase tracking-widest">
+                        <th class="px-5 py-3 text-left font-semibold w-16">No</th>
+                        <th class="px-5 py-3 text-left font-semibold">Username</th>
+                        <th class="px-5 py-3 text-left font-semibold">Aksi</th>
                     </tr>
                 </thead>
-
-                <!-- BODY DUMMY -->
-                <tbody class="divide-y">
-                    <!-- ROW -->
+                <tbody class="divide-y divide-gray-50">
                     @foreach ($admin as $item)
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 sm:px-6 py-3 font-medium text-gray-800">
-                                {{ ($admin->currentPage() - 1) * $admin->perPage() + $loop->iteration }}
+                        <tr class="hover:bg-blue-50/40 transition-colors duration-100">
+
+                            {{-- No --}}
+                            <td class="px-5 py-3.5">
+                                <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gray-100 text-gray-500 text-xs font-bold">
+                                    {{ ($admin->currentPage() - 1) * $admin->perPage() + $loop->iteration }}
+                                </span>
                             </td>
-                            <td class="px-4 sm:px-6 py-3 font-medium text-gray-800">
-                                {{ $item->username }}
+
+                            {{-- Username --}}
+                            <td class="px-5 py-3.5">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center flex-shrink-0">
+                                        <span class="text-blue-600 font-bold text-xs uppercase">
+                                            {{ strtoupper(substr($item->username, 0, 1)) }}
+                                        </span>
+                                    </div>
+                                    <span class="font-semibold text-gray-800 text-sm">{{ $item->username }}</span>
+                                </div>
                             </td>
-                            <td class="px-4 sm:px-6 py-3 flex flex-col sm:flex-row gap-2"
-                                x-data="{ 
-                                    openEdit: false, 
-                                    openDelete: false,
+
+                            {{-- Aksi --}}
+                            <td class="px-5 py-3.5"
+                                x-data="{
                                     adminId: '{{ $item->id_admin }}',
-                                    adminUsername: '{{ $item->username }}',
-                                    adminPassword: '{{ $item->password }}'
+                                    adminUsername: '{{ $item->username }}'
                                 }">
+                                <div class="flex items-center gap-2">
+                                    <button
+                                        @click="$dispatch('open-edit', {
+                                            id: '{{ $item->id_admin }}',
+                                            username: '{{ $item->username }}',
+                                            password: ''
+                                        })"
+                                        class="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100
+                                               text-amber-600 hover:text-amber-700 text-xs font-semibold rounded-lg
+                                               border border-amber-200 transition-all duration-150">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                        <span>Edit</span>
+                                    </button>
 
-                                <!-- Button Edit -->
-                                <button 
-                                    @click="$dispatch('open-edit', { 
-                                        id: '{{ $item->id_admin }}', 
-                                        username: '{{ $item->username }}', 
-                                        password: '' 
-                                    })"
-                                    class="w-full sm:w-auto bg-yellow-500 text-white px-3 py-1 rounded text-xs hover:bg-yellow-600">
-                                    Edit
-                                </button>
-
-                                <!-- Button Hapus -->
-                                <button 
-                                    @click="$dispatch('open-delete', { 
-                                        id: '{{ $item->id_admin }}', 
-                                        username: '{{ $item->username }}'
-                                    })"
-                                    class="w-full sm:w-auto bg-red-500 text-white px-3 py-1 rounded text-xs hover:bg-red-600">
-                                    Hapus
-                                </button>
+                                    <button
+                                        @click="$dispatch('open-delete', {
+                                            id: '{{ $item->id_admin }}',
+                                            username: '{{ $item->username }}'
+                                        })"
+                                        class="flex items-center space-x-1.5 px-3 py-1.5 bg-red-50 hover:bg-red-100
+                                               text-red-500 hover:text-red-600 text-xs font-semibold rounded-lg
+                                               border border-red-200 transition-all duration-150">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                        <span>Hapus</span>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -106,12 +143,23 @@
             </table>
         </div>
 
-        <!-- MODAL EDIT -->
-        <div 
+        {{-- Pagination --}}
+        @if ($admin->hasPages())
+            <div class="px-5 py-4 border-t border-gray-100 bg-gray-50/50">
+                {{ $admin->links() }}
+            </div>
+        @endif
+
+        {{-- ======================== MODAL EDIT ======================== --}}
+        <div
             x-data="{ open: {{ $errors->any() ? 'true' : 'false' }}, id: null, username: '', password: '' }"
             x-show="open"
-            x-transition
-            x-transition.duration.300ms
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
             x-cloak
             @open-edit.window="
                 open = true;
@@ -119,58 +167,69 @@
                 username = $event.detail.username;
                 password = $event.detail.password;
             "
-            class="fixed inset-0 flex items-center justify-center bg-transparent z-50 p-4"
+            class="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style="background: rgba(15,23,42,0.45); backdrop-filter: blur(4px);"
         >
-            <div 
+            <div
                 @click.away="open = false"
-                class="bg-white rounded-xl shadow-lg w-full max-w-md p-6"
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6"
             >
-                <h2 class="text-base sm:text-lg font-semibold text-gray-700 mb-4">
-                    Edit Admin
-                </h2>
+                {{-- Modal Header --}}
+                <div class="flex items-center justify-between mb-5">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-base font-bold text-gray-800">Edit Admin</h2>
+                    </div>
+                    <button @click="open = false"
+                            class="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
 
                 <form method="POST" :action="'/admin/daftar-admin/' + id">
                     @method('PUT')
                     @csrf
-
                     <input type="hidden" name="id_siswa" :value="id">
 
-                    <div class="mb-4">
-                        <label class="block text-xs sm:text-sm text-gray-600 mb-1">
-                            Username
-                        </label>
-                        <input 
-                            type="text" 
-                            name="username"
-                            x-model="username"
-                            class="w-full shadow-lg rounded-lg px-4 py-2 my-3 border border-gray-200 focus:ring-2 focus:ring-yellow-500 outline-none"
-                            placeholder="Masukkan username admin"
-                        >
-                        <label class="block text-xs sm:text-sm text-gray-600 mb-1">
-                            Password Baru (Kosongkan jika tidak diubah)
-                        </label>
-                        <input 
-                            type="password" 
-                            name="password"
-                            minlength="8"
-                            x-model="password"
-                            class="w-full shadow-lg rounded-lg px-4 py-2 my-3 border border-gray-200 focus:ring-2 focus:ring-yellow-500 outline-none"
-                            placeholder="Masukkan password baru"
-                        >
+                    <div class="space-y-4 mb-5">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Username</label>
+                            <input type="text" name="username" x-model="username"
+                                   placeholder="Masukkan username admin"
+                                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
+                                          placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400
+                                          focus:border-transparent transition-all duration-150">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                                Password Baru
+                                <span class="normal-case font-normal text-gray-400">(kosongkan jika tidak diubah)</span>
+                            </label>
+                            <input type="password" name="password" minlength="8" x-model="password"
+                                   placeholder="Masukkan password baru"
+                                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
+                                          placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400
+                                          focus:border-transparent transition-all duration-150">
+                        </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row justify-end gap-2">
-                        <button 
-                            type="button" 
-                            @click="open = false"
-                            class="w-full sm:w-auto px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
-                        >
+                    <div class="flex gap-2 pt-4 border-t border-gray-100">
+                        <button type="button" @click="open = false"
+                                class="flex-1 px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-semibold rounded-xl transition">
                             Batal
                         </button>
-                        <button 
-                            type="submit"
-                            class="w-full sm:w-auto px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 font-medium"
-                        >
+                        <button type="submit"
+                                class="flex-1 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold
+                                       rounded-xl shadow-md shadow-amber-200 transition">
                             Simpan Perubahan
                         </button>
                     </div>
@@ -178,57 +237,79 @@
             </div>
         </div>
 
-        <!-- MODAL HAPUS -->
-        <div 
+        {{-- ======================== MODAL HAPUS ======================== --}}
+        <div
             x-data="{ open: false, id: null, username: '' }"
             x-show="open"
-            x-transition
-            x-transition.duration.300ms
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
             x-cloak
             @open-delete.window="
                 open = true;
                 id = $event.detail.id;
                 username = $event.detail.username;
             "
-            class="fixed inset-0 flex items-center justify-center bg-transparent z-50 p-4"
+            class="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style="background: rgba(15,23,42,0.45); backdrop-filter: blur(4px);"
         >
-            <div 
+            <div
                 @click.away="open = false"
-                class="bg-white rounded-xl shadow-lg w-full max-w-md p-6"
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6"
             >
-                <h2 class="text-base sm:text-lg font-semibold text-gray-700 mb-4">
-                    Hapus Admin
-                </h2>
+                {{-- Modal Header --}}
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-base font-bold text-gray-800">Hapus Admin</h2>
+                    </div>
+                    <button @click="open = false"
+                            class="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
 
-                <p class="text-xs sm:text-sm text-gray-600 mb-6">
-                    Apakah Anda yakin ingin menghapus 
-                    <span class="font-semibold" x-text="username"></span>?
-                </p>
+                {{-- Warning Box --}}
+                <div class="bg-red-50 border border-red-100 rounded-xl px-4 py-3 mb-5">
+                    <p class="text-sm text-gray-600">
+                        Apakah Anda yakin ingin menghapus akun
+                        <span class="font-bold text-red-600" x-text="username"></span>?
+                        Tindakan ini tidak dapat dibatalkan.
+                    </p>
+                </div>
 
                 <form method="POST" :action="'/admin/daftar-admin/' + id">
                     @method('DELETE')
                     @csrf
-                    
                     <input type="hidden" name="id_kategori" :value="id">
 
-                    <div class="flex flex-col sm:flex-row justify-end gap-2">
-                        <button 
-                            type="button" 
-                            @click="open = false"
-                            class="w-full sm:w-auto px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
-                        >
+                    <div class="flex gap-2">
+                        <button type="button" @click="open = false"
+                                class="flex-1 px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-semibold rounded-xl transition">
                             Batal
                         </button>
-                        <button 
-                            type="submit"
-                            class="w-full sm:w-auto px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                        >
-                            Hapus
+                        <button type="submit"
+                                class="flex-1 px-4 py-2.5 bg-red-500 hover:bg-red-600 text-white text-sm font-semibold
+                                       rounded-xl shadow-md shadow-red-200 transition">
+                            Ya, Hapus
                         </button>
                     </div>
                 </form>
             </div>
         </div>
+
     </div>
 </div>
 @endsection

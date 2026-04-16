@@ -13,10 +13,10 @@
     </style>
 </head>
 <body class="bg-gray-100">
-    @include('admin.layout.navbar')
+    @include('admin.layout.sidebar')
 
     <!-- Main Content -->
-    <main class="min-h-screen pt-20 px-4 sm:px-6 lg:px-8">
+    <main class="min-h-screen mt-16 px-4 md:ml-64 sm:px-6 lg:px-8">
         @yield('content')
     </main>
 
