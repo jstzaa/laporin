@@ -30,7 +30,7 @@ class SiswaController extends Controller
         ]);
 
         $rawPassword = 'siswa-' . $request->nis;
-        $validated['password'] = Hash::make($rawPassword);
+        $validated['password'] = $rawPassword;
 
         Siswa::create($validated);
 
@@ -52,7 +52,7 @@ class SiswaController extends Controller
         $siswa = Siswa::findOrFail($id_siswa);
 
         if ($request->filled('password')) {
-            $validated['password'] = Hash::make($request->password);
+            $validated['password'] = $request->password;
         } else {
             unset($validated['password']);
         }
