@@ -62,7 +62,7 @@
                     @foreach ($kategori as $item)
                         <tr class="hover:bg-gray-50">
                             <td class="px-4 sm:px-6 py-3 font-medium text-gray-800">
-                                {{ $loop->iteration }}
+                                {{ ($kategori->currentPage() - 1) * $kategori->perPage() + $loop->iteration }}
                             </td>
                             <td class="px-4 sm:px-6 py-3 font-medium text-gray-800">
                                 {{ $item->ket_kategori }}
@@ -123,7 +123,10 @@
                     Edit Kategori
                 </h2>
 
-                <form>
+                <form method="POST" :action="'/admin/kategori/' + id">
+                    @method('PUT')
+                    @csrf
+
                     <input type="hidden" name="id_kategori" :value="id">
 
                     <div class="mb-4">
@@ -134,7 +137,7 @@
                             type="text" 
                             name="ket_kategori"
                             x-model="nama"
-                            class="w-full shadow-lg rounded-lg px-4 py-2"
+                            class="w-full shadow-lg rounded-lg px-4 py-2 border border-gray-200 focus:ring-2 focus:ring-yellow-500 outline-none"
                             placeholder="Masukkan nama kategori"
                         >
                     </div>
@@ -149,9 +152,9 @@
                         </button>
                         <button 
                             type="submit"
-                            class="w-full sm:w-auto px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+                            class="w-full sm:w-auto px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 font-medium"
                         >
-                            Edit
+                            Simpan Perubahan
                         </button>
                     </div>
                 </form>
@@ -185,7 +188,10 @@
                     <span class="font-semibold" x-text="nama"></span>?
                 </p>
 
-                <form>
+                <form method="POST" :action="'/admin/kategori/' + id">
+                    @method('DELETE')
+                    @csrf
+                    
                     <input type="hidden" name="id_kategori" :value="id">
 
                     <div class="flex flex-col sm:flex-row justify-end gap-2">
@@ -206,6 +212,10 @@
                 </form>
             </div>
         </div>
+    </div>
+    <!-- PAGINATION BUTTON -->
+    <div class="mt-6 flex justify-center">
+        {{ $kategori->links() }}
     </div>
 </div>
 @endsection
