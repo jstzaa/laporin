@@ -212,7 +212,7 @@
                         <div>
                             <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
                                 Password Baru
-                                <span class="normal-case font-normal text-gray-400">(kosongkan jika tidak diubah)</span>
+                                <span class="normal-case font-normal text-gray-400">(Opsional)</span>
                             </label>
                             <input type="password" name="password" minlength="8" x-model="password"
                                    placeholder="Masukkan password baru"
