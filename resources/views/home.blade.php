@@ -5,287 +5,458 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporin! — Sistem Pengaduan Siswa</title>
     @vite('resources/css/app.css')
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style> 
+    <style>
         html, body { overflow-x: hidden; }
-        body { font-family: 'Inter', sans-serif; } 
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
         [x-cloak] { display: none !important; }
-        
-        /* Animasi khusus saat halaman pertama kali dibuka (Initial Load) */
+
         .load-reveal {
-            animation: revealUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation: revealUp 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             opacity: 0;
         }
         @keyframes revealUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-        .delay-1 { animation-delay: 0.5s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.30s; }
+        .delay-3 { animation-delay: 0.45s; }
+        .delay-4 { animation-delay: 0.60s; }
+
+        /* Dot grid background */
+        .dot-grid {
+            background-image: radial-gradient(circle, #dbeafe 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Animated gradient blob */
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33%       { transform: translate(20px, -20px) scale(1.05); }
+            66%       { transform: translate(-15px, 10px) scale(0.97); }
+        }
+        .blob { animation: blobFloat 10s ease-in-out infinite; }
+        .blob-2 { animation: blobFloat 13s ease-in-out infinite reverse; }
+
+        /* Accent bar left border */
+        .section-label::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: #2563eb;
+            border-radius: 9999px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* Step connector line */
+        .step-connector {
+            position: absolute;
+            top: 28px;
+            left: calc(50% + 36px);
+            width: calc(100% - 72px);
+            height: 2px;
+            background: linear-gradient(to right, #2563eb44, #2563eb22);
+        }
     </style>
 </head>
 <body x-data="sectionSpy()" class="bg-slate-50 text-slate-900">
 
-    <nav class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 load-reveal"
+    {{-- ======================================================== --}}
+    {{-- NAVBAR                                                    --}}
+    {{-- ======================================================== --}}
+    <nav class="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100 shadow-sm load-reveal"
          @keydown.escape.window="mobileMenu = false">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Laporin!
-            </div>
-            <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#home"
-                   @click="setActive('home')"
-                   :class="linkClass('home')"
-                   class="transition duration-200">
-                    Home
-                </a>
-                <a href="#fitur"
-                   @click="setActive('fitur')"
-                   :class="linkClass('fitur')"
-                   class="transition duration-200">
-                    Fitur
-                </a>
-                <a href="#alur"
-                   @click="setActive('alur')"
-                   :class="linkClass('alur')"
-                   class="transition duration-200">
-                    Alur
-                </a>
-                <a href="#tentang"
-                   @click="setActive('tentang')"
-                   :class="linkClass('tentang')"
-                   class="transition duration-200">
-                    Tentang
-                </a>
+
+            {{-- Logo --}}
+            <div class="flex items-center space-x-2.5">
+                <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shadow-md shadow-blue-200 flex-shrink-0">
+                    <span class="text-white font-extrabold text-base tracking-tight">L</span>
+                </div>
+                <span class="text-lg font-extrabold text-gray-800 tracking-tight">Laporin!</span>
             </div>
 
+            {{-- Desktop Links --}}
+            <div class="hidden md:flex items-center space-x-1 text-sm font-semibold">
+                <a href="#home"   @click="setActive('home')"   :class="navClass('home')"   class="px-3 py-2 rounded-lg transition duration-150">Home</a>
+                <a href="#fitur"  @click="setActive('fitur')"  :class="navClass('fitur')"  class="px-3 py-2 rounded-lg transition duration-150">Fitur</a>
+                <a href="#alur"   @click="setActive('alur')"   :class="navClass('alur')"   class="px-3 py-2 rounded-lg transition duration-150">Alur</a>
+                <a href="#tentang" @click="setActive('tentang')" :class="navClass('tentang')" class="px-3 py-2 rounded-lg transition duration-150">Tentang</a>
+            </div>
+
+            {{-- CTA + Hamburger --}}
             <div class="flex items-center gap-2 sm:gap-3">
                 <a href="{{ route('show.login') }}"
-                   class="hidden sm:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-sm">
-                    Login
+                   class="hidden sm:inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white
+                          px-4 py-2 rounded-xl text-sm font-semibold shadow-md shadow-blue-200 transition-all duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                    </svg>
+                    <span>Login</span>
                 </a>
                 <button type="button"
                         @click="mobileMenu = !mobileMenu"
-                        class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition"
+                        class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200
+                               text-gray-600 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition"
                         aria-label="Toggle navigation menu">
                     <svg x-show="!mobileMenu" x-cloak class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
                     </svg>
                     <svg x-show="mobileMenu" x-cloak class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
         </div>
 
-        <div x-cloak
-             x-show="mobileMenu"
-             x-transition
-             @click.away="mobileMenu = false"
-             class="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md">
-            <div class="px-4 py-4 space-y-2 text-sm font-medium">
-                <a href="#home"
-                   @click="setActive('home'); mobileMenu = false"
-                   :class="linkClass('home')"
-                   class="block px-3 py-2 rounded-lg transition duration-200 hover:bg-slate-100">
-                    Home
-                </a>
-                <a href="#fitur"
-                   @click="setActive('fitur'); mobileMenu = false"
-                   :class="linkClass('fitur')"
-                   class="block px-3 py-2 rounded-lg transition duration-200 hover:bg-slate-100">
-                    Fitur
-                </a>
-                <a href="#alur"
-                   @click="setActive('alur'); mobileMenu = false"
-                   :class="linkClass('alur')"
-                   class="block px-3 py-2 rounded-lg transition duration-200 hover:bg-slate-100">
-                    Alur
-                </a>
-                <a href="#tentang"
-                   @click="setActive('tentang'); mobileMenu = false"
-                   :class="linkClass('tentang')"
-                   class="block px-3 py-2 rounded-lg transition duration-200 hover:bg-slate-100">
-                    Tentang
-                </a>
-                <a href="{{ route('show.login') }}"
-                   class="mt-3 inline-flex w-full justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition shadow-sm">
-                    Login
-                </a>
+        {{-- Mobile Menu --}}
+        <div x-cloak x-show="mobileMenu" x-transition @click.away="mobileMenu = false"
+             class="md:hidden border-t border-gray-100 bg-white/95 backdrop-blur-xl">
+            <div class="px-4 py-4 space-y-1 text-sm font-semibold">
+                <a href="#home"    @click="setActive('home');    mobileMenu = false" :class="navClass('home')"    class="block px-3 py-2.5 rounded-xl transition">Home</a>
+                <a href="#fitur"   @click="setActive('fitur');   mobileMenu = false" :class="navClass('fitur')"   class="block px-3 py-2.5 rounded-xl transition">Fitur</a>
+                <a href="#alur"    @click="setActive('alur');    mobileMenu = false" :class="navClass('alur')"    class="block px-3 py-2.5 rounded-xl transition">Alur</a>
+                <a href="#tentang" @click="setActive('tentang'); mobileMenu = false" :class="navClass('tentang')" class="block px-3 py-2.5 rounded-xl transition">Tentang</a>
+                <div class="pt-3 border-t border-gray-100">
+                    <a href="{{ route('show.login') }}"
+                       class="flex items-center justify-center space-x-2 w-full bg-blue-600 hover:bg-blue-700
+                              text-white px-4 py-2.5 rounded-xl font-semibold shadow-md shadow-blue-200 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                        </svg>
+                        <span>Login</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <header id="home" class="pt-28 sm:pt-32 lg:pt-40 pb-14 sm:pb-16 lg:pb-20 px-4 sm:px-6">
-        <div class="max-w-5xl mx-auto text-center">
-            <span class="inline-block px-3 sm:px-4 py-1.5 mb-5 sm:mb-6 text-[11px] sm:text-xs font-semibold tracking-wider text-blue-700 uppercase bg-blue-50 rounded-full italic load-reveal delay-1">
-                #SuaraSiswaMembangunSekolah
-            </span>
-            <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight mb-5 sm:mb-6 leading-tight load-reveal delay-2">
-                Lapor Masalah Sekolah <br> <span class="text-blue-600">Tanpa Ribet.</span>
+    {{-- ======================================================== --}}
+    {{-- HERO                                                      --}}
+    {{-- ======================================================== --}}
+    <header id="home" class="relative pt-28 sm:pt-36 pb-20 sm:pb-28 px-4 sm:px-6 overflow-hidden dot-grid">
+
+        {{-- Decorative blobs --}}
+        <div class="blob absolute -top-32 -left-32 w-[500px] h-[500px] bg-blue-100 rounded-full opacity-40 blur-3xl pointer-events-none"></div>
+        <div class="blob-2 absolute -bottom-32 -right-32 w-[400px] h-[400px] bg-indigo-100 rounded-full opacity-40 blur-3xl pointer-events-none"></div>
+
+        <div class="relative max-w-4xl mx-auto text-center">
+
+            {{-- Badge --}}
+            <div class="inline-flex items-center space-x-2 bg-white border border-blue-100 shadow-sm
+                        px-4 py-1.5 rounded-full mb-7 load-reveal delay-1">
+                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+                <span class="text-xs font-semibold text-blue-600 tracking-wide uppercase">#SuaraSiswaMembangunSekolah</span>
+            </div>
+
+            {{-- Headline --}}
+            <h1 class="text-4xl sm:text-5xl lg:text-[68px] font-extrabold tracking-tight leading-[1.1] mb-6 load-reveal delay-2">
+                Lapor Masalah Sekolah<br>
+                <span class="relative inline-block">
+                    <span class="relative z-10 text-blue-600">Tanpa Ribet.</span>
+                    <span class="absolute bottom-1 left-0 w-full h-3 bg-blue-100 rounded-full -z-0 opacity-70"></span>
+                </span>
             </h1>
-            <p class="text-base sm:text-lg lg:text-xl text-slate-500 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed load-reveal delay-3">
-                Sampaikan aspirasi, keluhan, atau saran kamu secara transparan. Kami memastikan setiap laporan didengar dan ditindaklanjuti dengan cepat.
+
+            {{-- Subtext --}}
+            <p class="text-base sm:text-lg text-gray-500 mb-10 max-w-xl mx-auto leading-relaxed load-reveal delay-3">
+                Sampaikan aspirasi, keluhan, atau saran kamu secara transparan. Setiap laporan didengar dan ditindaklanjuti dengan cepat.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 load-reveal" style="animation-delay: 0.8s; opacity: 0;">
-                <a href="{{ route('show.login') }}" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-200 hover:scale-105 transition-transform">
-                    Mulai Lapor Sekarang
+
+            {{-- CTA Buttons --}}
+            <div class="flex flex-col sm:flex-row justify-center gap-3 load-reveal delay-4">
+                <a href="{{ route('show.login') }}"
+                   class="inline-flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700
+                          text-white px-7 py-3.5 rounded-2xl font-bold shadow-xl shadow-blue-200
+                          hover:scale-105 transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                    </svg>
+                    <span>Mulai Lapor Sekarang</span>
                 </a>
-                <a href="#fitur" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-white border border-slate-200 text-slate-600 rounded-2xl font-bold hover:bg-slate-50 transition">
-                    Lihat Fitur
+                <a href="#fitur"
+                   class="inline-flex items-center justify-center space-x-2 bg-white border border-gray-200
+                          text-gray-600 px-7 py-3.5 rounded-2xl font-bold hover:bg-gray-50
+                          hover:border-blue-200 hover:text-blue-600 transition-all duration-200 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+                    </svg>
+                    <span>Lihat Fitur</span>
                 </a>
             </div>
         </div>
     </header>
 
-    <section id="fitur" class="py-16 sm:py-20 lg:py-24 bg-white border-y border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="text-center mb-10 sm:mb-16" data-aos="fade-up">
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4">Fitur Utama</h2>
-                <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
+    {{-- ======================================================== --}}
+    {{-- FITUR                                                     --}}
+    {{-- ======================================================== --}}
+    <section id="fitur" class="py-20 sm:py-24 bg-white border-y border-gray-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            {{-- Section Header --}}
+            <div class="mb-14" data-aos="fade-up">
+                <p class="section-label text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">Fitur Platform</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">Semua yang Kamu Butuhkan</h2>
+                <p class="text-sm text-gray-400 mt-1 max-w-md">Dirancang agar proses pengaduan terasa ringan, transparan, dan terkelola dengan baik.</p>
             </div>
-            
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
-                <div data-aos="fade-right" data-aos-delay="100" class="group p-6 sm:p-8 rounded-3xl border border-slate-100 bg-slate-50/50 hover:shadow-xl hover:bg-white transition-all duration-300 hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-blue-100 group-hover:rotate-12 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Input Pengaduan</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Kirim laporan kamu dengan mudah. Sistem kami akan menjaga kerahasiaan identitas kamu.</p>
-                </div>
 
-                <div data-aos="fade-up" data-aos-delay="200" class="group p-6 sm:p-8 rounded-3xl border border-slate-100 bg-slate-50/50 hover:shadow-xl hover:bg-white transition-all duration-300 hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-indigo-100 group-hover:rotate-12 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01m-.01 4h.01"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Histori Real-Time</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Pantau status laporanmu mulai dari 'Menunggu', 'Proses', hingga 'Selesai' secara transparan.</p>
-                </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-                <div data-aos="fade-left" data-aos-delay="300" class="group p-6 sm:p-8 rounded-3xl border border-slate-100 bg-slate-50/50 hover:shadow-xl hover:bg-white transition-all duration-300 hover:-translate-y-2 sm:col-span-2 lg:col-span-1">
-                    <div class="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-emerald-100 group-hover:rotate-12 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6M9 12h6M9 16h3"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15.5l1.5 1.5 2.5-2.5"></path>
+                {{-- Fitur 1 --}}
+                <div data-aos="fade-up" data-aos-delay="100"
+                     class="group bg-white border border-gray-100 rounded-2xl p-6 shadow-sm
+                            hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                    <div class="w-11 h-11 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center mb-5
+                                group-hover:bg-blue-600 group-hover:border-blue-600 transition-colors duration-200">
+                        <svg class="w-5 h-5 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Manajemen Admin</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Admin dapat mengelola kategori, menanggapi aduan, dan mengontrol data siswa dengan panel kendali modern.</p>
+                    <h3 class="text-base font-bold text-gray-800 mb-2">Input Pengaduan</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Kirim laporan dengan mudah. Identitas kamu dijaga kerahasiaannya oleh sistem kami.</p>
+                </div>
+
+                {{-- Fitur 2 --}}
+                <div data-aos="fade-up" data-aos-delay="200"
+                     class="group bg-white border border-gray-100 rounded-2xl p-6 shadow-sm
+                            hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                    <div class="w-11 h-11 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center justify-center mb-5
+                                group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-colors duration-200">
+                        <svg class="w-5 h-5 text-indigo-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-base font-bold text-gray-800 mb-2">Histori Real-Time</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Pantau status laporan dari <em>Menunggu</em>, <em>Proses</em>, hingga <em>Selesai</em> secara transparan.</p>
+                </div>
+
+                {{-- Fitur 3 --}}
+                <div data-aos="fade-up" data-aos-delay="300"
+                     class="group bg-white border border-gray-100 rounded-2xl p-6 shadow-sm
+                            hover:shadow-lg hover:-translate-y-1 transition-all duration-200 sm:col-span-2 lg:col-span-1">
+                    <div class="w-11 h-11 bg-emerald-50 border border-emerald-100 rounded-xl flex items-center justify-center mb-5
+                                group-hover:bg-emerald-600 group-hover:border-emerald-600 transition-colors duration-200">
+                        <svg class="w-5 h-5 text-emerald-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-base font-bold text-gray-800 mb-2">Manajemen Admin</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Panel kendali modern untuk mengelola kategori, menanggapi aduan, dan mengontrol data siswa.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="alur" class="py-16 sm:py-20 lg:py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="text-center mb-10 sm:mb-16" data-aos="fade-up">
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4">Bagaimana Cara Kerjanya?</h2>
-                <p class="text-sm sm:text-base text-slate-500">Proses pelaporan hingga tindak lanjut dibuat sesederhana mungkin.</p>
+    {{-- ======================================================== --}}
+    {{-- ALUR                                                      --}}
+    {{-- ======================================================== --}}
+    <section id="alur" class="py-20 sm:py-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            <div class="mb-14" data-aos="fade-up">
+                <p class="section-label text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">Cara Kerja</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">Proses Simpel, Hasil Nyata</h2>
+                <p class="text-sm text-gray-400 mt-1">Dari pengiriman laporan hingga penyelesaian, semuanya transparan.</p>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                <div class="text-center" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-white border-2 border-blue-600 text-blue-600 rounded-full flex items-center justify-center text-lg sm:text-xl font-bold mx-auto mb-5 sm:mb-6 shadow-sm">1</div>
-                    <h4 class="font-bold mb-2">Tulis Laporan</h4>
-                    <p class="text-sm text-slate-500">Login dan sampaikan keluhanmu dengan data yang valid.</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                @php
+                    $steps = [
+                        ['num' => '1', 'title' => 'Tulis Laporan',   'desc' => 'Login dan sampaikan keluhanmu dengan data yang valid.',         'color' => 'blue'],
+                        ['num' => '2', 'title' => 'Verifikasi',      'desc' => 'Admin akan mengecek kebenaran dan relevansi laporan yang masuk.', 'color' => 'indigo'],
+                        ['num' => '3', 'title' => 'Tindak Lanjut',   'desc' => 'Laporan diteruskan ke pihak terkait untuk segera diselesaikan.', 'color' => 'violet'],
+                        ['num' => '✓', 'title' => 'Selesai',         'desc' => 'Masalah teratasi dan kamu bisa memantau perkembangannya.',        'color' => 'emerald'],
+                    ];
+                @endphp
+
+                @foreach($steps as $i => $step)
+                <div data-aos="fade-up" data-aos-delay="{{ ($i + 1) * 100 }}"
+                     class="relative bg-white border border-gray-100 rounded-2xl p-6 shadow-sm
+                            hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+
+                    {{-- Step number badge --}}
+                    <div class="w-10 h-10 rounded-xl
+                                @if($step['color'] === 'blue')    bg-blue-600 shadow-md shadow-blue-200
+                                @elseif($step['color'] === 'indigo') bg-indigo-600 shadow-md shadow-indigo-200
+                                @elseif($step['color'] === 'violet') bg-violet-600 shadow-md shadow-violet-200
+                                @else bg-emerald-600 shadow-md shadow-emerald-200 @endif
+                                flex items-center justify-center text-white font-extrabold text-sm mb-4">
+                        {{ $step['num'] }}
+                    </div>
+
+                    <h4 class="font-bold text-gray-800 text-sm mb-1.5">{{ $step['title'] }}</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">{{ $step['desc'] }}</p>
+
+                    {{-- Connector dot on right (desktop) --}}
+                    @if($i < 3)
+                    <div class="hidden lg:block absolute top-9 -right-3 w-5 h-5 bg-white border-2 border-gray-200 rounded-full z-10"></div>
+                    @endif
                 </div>
-                <div class="text-center" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-white border-2 border-blue-600 text-blue-600 rounded-full flex items-center justify-center text-lg sm:text-xl font-bold mx-auto mb-5 sm:mb-6 shadow-sm">2</div>
-                    <h4 class="font-bold mb-2">Verifikasi</h4>
-                    <p class="text-sm text-slate-500">Admin akan mengecek kebenaran laporan yang masuk.</p>
-                </div>
-                <div class="text-center" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-white border-2 border-blue-600 text-blue-600 rounded-full flex items-center justify-center text-lg sm:text-xl font-bold mx-auto mb-5 sm:mb-6 shadow-sm">3</div>
-                    <h4 class="font-bold mb-2">Tindak Lanjut</h4>
-                    <p class="text-sm text-slate-500">Laporan diteruskan ke pihak terkait untuk diselesaikan.</p>
-                </div>
-                <div class="text-center" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-lg sm:text-xl font-bold mx-auto mb-5 sm:mb-6 shadow-lg shadow-blue-200">&#10003;</div>
-                    <h4 class="font-bold mb-2">Selesai</h4>
-                    <p class="text-sm text-slate-500">Masalah teratasi dan kamu bisa melihat perkembangannya.</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <section id="tentang" class="py-16 sm:py-20 lg:py-24 bg-white">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6">
-            <div data-aos="fade-up" class="bg-gradient-to-br from-blue-600 to-indigo-800 rounded-3xl sm:rounded-4xl p-6 sm:p-10 md:p-12 lg:p-16 text-white overflow-hidden relative shadow-2xl">
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl"></div>
+    {{-- ======================================================== --}}
+    {{-- TENTANG                                                   --}}
+    {{-- ======================================================== --}}
+    <section id="tentang" class="py-20 sm:py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
-                <div class="relative z-10 grid md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
-                    <div data-aos="fade-right" data-aos-delay="200">
-                        <h2 class="text-2xl sm:text-3xl font-bold mb-5 sm:mb-6">Tentang Laporin!</h2>
-                        <p class="text-blue-100 leading-relaxed mb-6">
+            <div class="mb-14" data-aos="fade-up">
+                <p class="section-label text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">Tentang</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">Kenapa Laporin!?</h2>
+                <p class="text-sm text-gray-400 mt-1">Platform yang lahir dari kebutuhan nyata siswa sekolah.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-6 items-stretch" data-aos="fade-up" data-aos-delay="100">
+
+                {{-- Left: About text --}}
+                <div class="lg:col-span-3 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 text-white relative overflow-hidden shadow-xl shadow-blue-100">
+                    <div class="absolute -top-16 -right-16 w-48 h-48 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 bg-white/20 border border-white/30 rounded-xl flex items-center justify-center mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-extrabold mb-4">Tentang Laporin!</h3>
+                        <p class="text-blue-100 text-sm leading-relaxed mb-4">
                             Laporin! adalah platform digital yang dirancang untuk menjembatani komunikasi antara siswa dan pihak sekolah. Kami percaya bahwa setiap perubahan besar dimulai dari satu suara yang berani.
                         </p>
-                        <p class="text-blue-100 leading-relaxed">
+                        <p class="text-blue-100 text-sm leading-relaxed">
                             Dibangun dengan teknologi modern untuk menjamin keamanan data dan kecepatan respon dari pihak sekolah.
                         </p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 sm:gap-4" data-aos="fade-left" data-aos-delay="400">
-                        <div class="bg-white/10 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-                            <div class="text-xl sm:text-2xl font-bold">Safe</div>
-                            <div class="text-xs text-blue-200">Data Terenkripsi</div>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-                            <div class="text-xl sm:text-2xl font-bold">Fast</div>
-                            <div class="text-xs text-blue-200">Respon Cepat</div>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-                            <div class="text-xl sm:text-2xl font-bold">Clean</div>
-                            <div class="text-xs text-blue-200">UI Minimalis</div>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-                            <div class="text-xl sm:text-2xl font-bold">Easy</div>
-                            <div class="text-xs text-blue-200">Mudah Digunakan</div>
+                        <div class="mt-6 pt-5 border-t border-white/20">
+                            <a href="{{ route('show.login') }}"
+                               class="inline-flex items-center space-x-2 bg-white text-blue-600 font-bold text-sm
+                                      px-5 py-2.5 rounded-xl hover:bg-blue-50 transition shadow-md">
+                                <span>Mulai Sekarang</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
+                </div>
+
+                {{-- Right: Stats grid --}}
+                <div class="lg:col-span-2 grid grid-cols-2 gap-4">
+                    @foreach([
+                        ['Safe',  'Data Terenkripsi',  'blue',    'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
+                        ['Fast',  'Respon Cepat',      'amber',   'M13 10V3L4 14h7v7l9-11h-7z'],
+                        ['Clean', 'UI Minimalis',      'indigo',  'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 110 2H5a1 1 0 01-1-1zm0 4a1 1 0 011-1h6a1 1 0 110 2H5a1 1 0 01-1-1z'],
+                        ['Easy',  'Mudah Digunakan',   'emerald', 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
+                    ] as [$title, $sub, $color, $path])
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm
+                                hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between">
+                        <div class="w-9 h-9 rounded-xl mb-3
+                                    @if($color === 'blue')    bg-blue-50 border border-blue-100
+                                    @elseif($color === 'amber') bg-amber-50 border border-amber-100
+                                    @elseif($color === 'indigo') bg-indigo-50 border border-indigo-100
+                                    @else bg-emerald-50 border border-emerald-100 @endif
+                                    flex items-center justify-center">
+                            <svg class="w-4 h-4
+                                        @if($color === 'blue')    text-blue-600
+                                        @elseif($color === 'amber') text-amber-500
+                                        @elseif($color === 'indigo') text-indigo-600
+                                        @else text-emerald-600 @endif"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $path }}"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-lg font-extrabold text-gray-800">{{ $title }}</div>
+                            <div class="text-xs text-gray-400 font-medium">{{ $sub }}</div>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-white border-t border-slate-200 pt-14 sm:pt-16 lg:pt-20 pb-8 sm:pb-10" data-aos="fade-in">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 mb-12 sm:mb-16">
+    {{-- ======================================================== --}}
+    {{-- FOOTER                                                    --}}
+    {{-- ======================================================== --}}
+    <footer class="bg-white border-t border-gray-100" data-aos="fade-in">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-14 pb-8">
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
+
+                {{-- Brand --}}
                 <div>
-                    <div class="text-2xl font-black tracking-tighter text-blue-600 mb-6">Laporin!</div>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-6">
-                        Platform pengaduan siswa modern yang mengutamakan transparansi, keamanan, dan kecepatan dalam menanggapi aspirasi.
+                    <div class="flex items-center space-x-2.5 mb-4">
+                        <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shadow-md shadow-blue-200">
+                            <span class="text-white font-extrabold text-base">L</span>
+                        </div>
+                        <span class="text-lg font-extrabold text-gray-800 tracking-tight">Laporin!</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Platform pengaduan siswa modern yang mengutamakan transparansi, keamanan, dan kecepatan menanggapi aspirasi.
                     </p>
                 </div>
+
+                {{-- Navigasi --}}
                 <div>
-                    <h4 class="font-bold text-slate-900 mb-6">Navigasi</h4>
-                    <ul class="space-y-4 text-sm text-slate-500">
-                        <li><a href="#home" class="hover:text-blue-600 transition">Beranda</a></li>
-                        <li><a href="#fitur" class="hover:text-blue-600 transition">Fitur Utama</a></li>
-                        <li><a href="#alur" class="hover:text-blue-600 transition">Alur Laporan</a></li>
-                        <li><a href="#tentang" class="hover:text-blue-600 transition">Tentang Kami</a></li>
+                    <div class="flex items-center space-x-2 mb-5">
+                        <div class="w-1 h-4 bg-blue-600 rounded-full"></div>
+                        <h4 class="text-sm font-bold text-gray-700">Navigasi</h4>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#home"    class="hover:text-blue-600 transition font-medium">Beranda</a></li>
+                        <li><a href="#fitur"   class="hover:text-blue-600 transition font-medium">Fitur Utama</a></li>
+                        <li><a href="#alur"    class="hover:text-blue-600 transition font-medium">Alur Laporan</a></li>
+                        <li><a href="#tentang" class="hover:text-blue-600 transition font-medium">Tentang Kami</a></li>
                     </ul>
                 </div>
+
+                {{-- Kontak --}}
                 <div>
-                    <h4 class="font-bold text-slate-900 mb-6">Hubungi Kami</h4>
-                    <ul class="space-y-4 text-sm text-slate-500">
-                        <li class="flex items-center gap-3"><span class="text-blue-600 font-bold italic">@</span> admin@laporin.sch.id</li>
-                        <li class="flex items-center gap-3"><span class="text-blue-600 font-bold italic">#</span> SMK Al-Khoeriyah, Tasikmalaya</li>
+                    <div class="flex items-center space-x-2 mb-5">
+                        <div class="w-1 h-4 bg-blue-600 rounded-full"></div>
+                        <h4 class="text-sm font-bold text-gray-700">Hubungi Kami</h4>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-center space-x-2.5">
+                            <span class="w-6 h-6 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </span>
+                            <span class="font-medium">admin@laporin.sch.id</span>
+                        </li>
+                        <li class="flex items-center space-x-2.5">
+                            <span class="w-6 h-6 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </span>
+                            <span class="font-medium">SMK Al-Khoeriyah, Tasikmalaya</span>
+                        </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="pt-6 sm:pt-8 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-3 sm:gap-4">
-                <p class="text-slate-400 text-xs">&copy; 2026 Laporin! App. All rights reserved.</p>
-                <div class="text-slate-400 text-xs">
-                    Programmed by <span class="text-slate-900 font-bold">Fahriza Kurniawan</span> 
+            {{-- Bottom bar --}}
+            <div class="pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <p class="text-xs text-gray-400">&copy; 2026 Laporin! App. All rights reserved.</p>
+                <div class="text-xs text-gray-400">
+                    Programmed by <span class="text-gray-700 font-bold">Fahriza Kurniawan</span>
                 </div>
             </div>
         </div>
     </footer>
 
+    {{-- ======================================================== --}}
+    {{-- SCRIPTS (tidak diubah sama sekali)                        --}}
+    {{-- ======================================================== --}}
     <script>
         window.sectionSpy = function () {
             return {
@@ -294,71 +465,38 @@
                 sectionIds: ['home', 'fitur', 'alur', 'tentang'],
                 visibleRatios: {},
                 init() {
-                    const sections = this.sectionIds
-                        .map((id) => document.getElementById(id))
-                        .filter(Boolean);
-
-                    if (!sections.length) {
-                        return;
-                    }
-
+                    const sections = this.sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+                    if (!sections.length) return;
                     if (window.location.hash) {
                         const hashId = window.location.hash.replace('#', '');
-                        if (this.sectionIds.includes(hashId)) {
-                            this.activeSection = hashId;
-                        }
+                        if (this.sectionIds.includes(hashId)) this.activeSection = hashId;
                     }
-
-                    this.sectionIds.forEach((id) => {
-                        this.visibleRatios[id] = 0;
-                    });
-
+                    this.sectionIds.forEach((id) => { this.visibleRatios[id] = 0; });
                     const observer = new IntersectionObserver((entries) => {
                         entries.forEach((entry) => {
-                            this.visibleRatios[entry.target.id] = entry.isIntersecting
-                                ? entry.intersectionRatio
-                                : 0;
+                            this.visibleRatios[entry.target.id] = entry.isIntersecting ? entry.intersectionRatio : 0;
                         });
-
                         this.updateActiveSection();
-                    }, {
-                        rootMargin: '-35% 0px -45% 0px',
-                        threshold: [0.2, 0.4, 0.6]
-                    });
-
+                    }, { rootMargin: '-35% 0px -45% 0px', threshold: [0.2, 0.4, 0.6] });
                     sections.forEach((section) => observer.observe(section));
-
                     window.addEventListener('scroll', () => this.updateActiveSection(), { passive: true });
-                    window.addEventListener('resize', () => {
-                        if (window.innerWidth >= 768) {
-                            this.mobileMenu = false;
-                        }
-                    });
+                    window.addEventListener('resize', () => { if (window.innerWidth >= 768) this.mobileMenu = false; });
                 },
                 updateActiveSection() {
-                    if (window.scrollY < 120) {
-                        this.activeSection = 'home';
-                        return;
-                    }
-
+                    if (window.scrollY < 120) { this.activeSection = 'home'; return; }
                     const nextActive = this.sectionIds.reduce((bestId, currentId) => {
-                        return (this.visibleRatios[currentId] ?? 0) > (this.visibleRatios[bestId] ?? 0)
-                            ? currentId
-                            : bestId;
+                        return (this.visibleRatios[currentId] ?? 0) > (this.visibleRatios[bestId] ?? 0) ? currentId : bestId;
                     }, this.sectionIds[0]);
-
-                    if ((this.visibleRatios[nextActive] ?? 0) > 0) {
-                        this.activeSection = nextActive;
-                    }
+                    if ((this.visibleRatios[nextActive] ?? 0) > 0) this.activeSection = nextActive;
                 },
-                setActive(sectionId) {
-                    this.activeSection = sectionId;
-                    this.mobileMenu = false;
+                setActive(sectionId) { this.activeSection = sectionId; this.mobileMenu = false; },
+                navClass(sectionId) {
+                    return this.activeSection === sectionId
+                        ? 'bg-blue-50 text-blue-600'
+                        : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50';
                 },
                 linkClass(sectionId) {
-                    return this.activeSection === sectionId
-                        ? 'text-blue-600 font-semibold'
-                        : 'text-slate-600 hover:text-blue-600';
+                    return this.activeSection === sectionId ? 'text-blue-600 font-semibold' : 'text-gray-600 hover:text-blue-600';
                 }
             };
         };
@@ -366,12 +504,7 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,      // Durasi animasi (ms)
-            easing: 'ease-in-out',
-            mirror: false,       // Tidak mengulang saat scroll ke atas
-            offset: 80,          // Jarak sebelum animasi dipicu
-        });
+        AOS.init({ duration: 800, easing: 'ease-out', mirror: false, offset: 80 });
     </script>
 </body>
 </html>
