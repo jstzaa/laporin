@@ -5,10 +5,10 @@
     <!-- TITLE -->
     <div>
         <h1 class="text-xl sm:text-2xl font-bold text-gray-800">
-            Daftar Aduan
+            Daftar Laporan
         </h1>
         <p class="text-xs sm:text-sm text-gray-500">
-            Kelola semua laporan aduan siswa
+            Kelola semua laporan laporan siswa
         </p>
     </div>
 
@@ -49,8 +49,8 @@
                 <!-- HEADER -->
                 <thead class="bg-gray-100 text-gray-700 text-xs uppercase">
                     <tr>
-                        <th class="px-4 sm:px-6 py-3 text-left">Pengadu</th>
-                        <th class="px-4 sm:px-6 py-3 text-left">Isi Aduan</th>
+                        <th class="px-4 sm:px-6 py-3 text-left">Pelapor</th>
+                        <th class="px-4 sm:px-6 py-3 text-left">Laporan</th>
                         <th class="px-4 sm:px-6 py-3 text-left">Status & Feedback</th>
                     </tr>
                 </thead>

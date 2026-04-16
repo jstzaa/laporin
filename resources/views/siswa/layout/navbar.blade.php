@@ -3,10 +3,10 @@
         <div class="flex justify-between items-center h-16">
             <div class="flex items-center space-x-2">
                 <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
-                    A
+                    L
                 </div>
                 <span class="text-lg font-bold text-gray-800">
-                    Aplikasi Pengaduan
+                    Laporin!
                 </span>
             </div>
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium">

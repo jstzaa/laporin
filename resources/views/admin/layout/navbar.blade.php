@@ -6,10 +6,10 @@
             <!-- Logo & Title -->
             <div class="flex items-center space-x-2">
                 <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
-                    A
+                    L
                 </div>
                 <span class="text-base sm:text-lg font-bold text-gray-800">
-                    Aplikasi Pengaduan
+                    Laporin!
                 </span>
             </div>
 
@@ -17,7 +17,7 @@
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
                 <a href="{{ route('show.home.admin') }}"
                    class="text-gray-600 hover:text-blue-600 transition duration-200">
-                    Daftar Aduan
+                    Daftar Laporan
                 </a>
                 <a href="{{ route('show.kategori') }}"
                    class="text-gray-600 hover:text-blue-600 transition duration-200">
@@ -77,7 +77,7 @@
         <div class="px-4 py-4 space-y-3 text-sm font-medium">
             <a href="{{ route('show.home.admin') }}"
                class="block text-gray-600 hover:text-blue-600 transition">
-                Daftar Aduan
+                Daftar Laporan
             </a>
             <a href="{{ route('show.kategori') }}"
                class="block text-gray-600 hover:text-blue-600 transition">

@@ -24,7 +24,7 @@ class AdminManageController extends Controller
     {
         $validated = $request->validate(['username' => 'required|max:255']);
 
-        $rawPassword = $request->username . '@admin.com';
+        $rawPassword = $request->username . '@laporin.sch.id';
         $validated['password'] = $rawPassword;
 
         Admin::create($validated);
