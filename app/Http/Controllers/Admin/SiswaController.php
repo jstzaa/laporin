@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Siswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class SiswaController extends Controller
 {
@@ -29,7 +28,7 @@ class SiswaController extends Controller
             'kelas' => 'required|max:255',
         ]);
 
-        $rawPassword = 'siswa-' . $request->nis;
+        $rawPassword = $request->nama_siswa . $request->nis . '@siswa.com';
         $validated['password'] = $rawPassword;
 
         Siswa::create($validated);
