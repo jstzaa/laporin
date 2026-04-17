@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::middleware('auth:admin')->group(function(){
     Route::get('/admin/home', [Admin\AspirasiController::class, 'index'])->name('show.home.admin');
+    Route::post('/admin/home', [Admin\AspirasiController::class, 'show'])->name('show.filter.aspirasi');
 
     Route::get('/admin/kategori', [Admin\KategoriController::class, 'index'])->name('show.kategori');
     Route::post('/admin/kategori', [Admin\KategoriController::class, 'store'])->name('add.kategori');
@@ -29,6 +30,8 @@ Route::middleware('auth:admin')->group(function(){
 });
 Route::middleware('auth:siswa')->group(function(){
     Route::get('/siswa/home', [Siswa\AspirasiController::class, 'index'])->name('show.home.siswa');
+    Route::post('/siswa/home', [SIswa\AspirasiController::class, 'store'])->name('add.laporan');
+    Route::get('/siswa/history', [Siswa\AspirasiController::class, 'showHistory'])->name('show.history.siswa');
 });
     
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');

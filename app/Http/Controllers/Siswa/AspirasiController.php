@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Siswa;
 
+use App\Models\Kategori;
+use App\Models\InputAspirasi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AspirasiController extends Controller
 {
@@ -12,7 +15,13 @@ class AspirasiController extends Controller
      */
     public function index()
     {
-        return view('siswa.pages.home');
+        $kategori = Kategori::select('id_kategori', 'ket_kategori')->orderBy('ket_kategori', 'asc')->get();
+        return view('siswa.pages.home', compact('kategori'));
+    }
+
+    public function showHistory()
+    {
+        return view('siswa.pages.history');
     }
 
     /**
@@ -28,7 +37,20 @@ class AspirasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kategori' => 'required|exists:kategoris,id_kategori',
+            'lokasi' => 'required|max:255',
+            'keterangan' => 'required'
+        ]);
+
+        InputAspirasi::create([
+            'id_siswa' => Auth::guard('siswa')->user()->id_siswa,
+            'id_kategori' => $request->kategori,
+            'lokasi' => $request->lokasi,
+            'keterangan' => $request->keterangan
+        ]);
+
+        return redirect()->back()->with('success','Laporan berhasil disampaikan!');
     }
 
     /**
@@ -36,7 +58,7 @@ class AspirasiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
