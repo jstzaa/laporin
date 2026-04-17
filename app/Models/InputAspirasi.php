@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Siswa;
 use App\Models\Kategori;
+use App\Models\Aspirasi;
 
 class InputAspirasi extends Model
 {
@@ -17,6 +19,12 @@ class InputAspirasi extends Model
 
     // Inisialisasi Fillable
     protected $fillable = ['id_siswa','id_kategori','lokasi','keterangan'];
+
+    // Relasi ke tabel aspirasi
+    public function aspirasi(): HasOne
+    {
+        return $this->hasOne(Aspirasi::class, 'id_pelaporan','id_pelaporan');
+    }
 
     // Relasi ke tabel siswa
     public function siswa(): BelongsTo

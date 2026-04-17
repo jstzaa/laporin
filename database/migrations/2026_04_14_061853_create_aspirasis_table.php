@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('id_admin')
                 ->constrained('admins', 'id_admin')
                 ->cascadeOnDelete();
-
-            $table->foreignId('id_kategori')
-                ->constrained('kategoris', 'id_kategori')
+            $table->foreignId('id_pelaporan')
+                ->unique()
+                ->constrained('input_aspirasis', 'id_pelaporan')
                 ->cascadeOnDelete();
             $table->integer('feedback');
             $table->timestamps();

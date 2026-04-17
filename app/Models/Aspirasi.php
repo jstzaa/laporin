@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Kategori;
 use App\Models\Admin;
+use App\Models\InputAspirasi;
 
 class Aspirasi extends Model
 {
@@ -19,6 +20,12 @@ class Aspirasi extends Model
     protected $fillable = [
         'status', 'id_admin', 'id_kategori', 'feedback'
     ];
+
+    // Relasi ke tabel input aspirasi
+    public function input_aspirasi(): BelongsTo
+    {
+        return $this->belongsTo(InputAspirasi::class, 'id_pelaporan', 'id_pelaporan');
+    }
 
     // Relasi ke tabel kategori
     public function kategori(): BelongsTo
