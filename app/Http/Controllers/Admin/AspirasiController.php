@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Aspirasi;
+use App\Models\InputAspirasi;
+use App\Models\Kategori;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,9 @@ class AspirasiController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.home');
+        $laporan = InputAspirasi::with('siswa')->orderBy('created_at', 'desc')->paginate(10);
+        $kategori = Kategori::select('id_kategori', 'ket_kategori')->orderBy('ket_kategori', 'asc')->get();
+        return view('admin.pages.home', compact('laporan', 'kategori'));
     }
 
     /**
@@ -35,9 +39,22 @@ class AspirasiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Aspirasi $aspirasi)
+    public function show(Request $request)
     {
-        //
+        $request->validate([
+            'tanggal' => 'required|date',
+            'kategori' => 'required|exists:kategoris,id_kategori'
+        ]);
+
+        $laporan = InputAspirasi::with('siswa')
+                    ->whereDate('created_at', $request->tanggal)
+                    ->where(['id_kategori' => $request->kategori])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
+
+        $kategori = Kategori::select('id_kategori', 'ket_kategori')->orderBy('ket_kategori', 'asc')->get();
+        
+        return view('admin.pages.home', compact('laporan', 'kategori'));
     }
 
     /**
