@@ -18,7 +18,7 @@ class Aspirasi extends Model
 
     // Inisialisasi Fillable
     protected $fillable = [
-        'status', 'id_admin', 'id_kategori', 'feedback'
+        'status', 'id_admin', 'id_pelaporan', 'feedback'
     ];
 
     // Relasi ke tabel input aspirasi

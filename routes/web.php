@@ -11,7 +11,7 @@ Route::get('/', function () {
 
 Route::middleware('auth:admin')->group(function(){
     Route::get('/admin/home', [Admin\AspirasiController::class, 'index'])->name('show.home.admin');
-    Route::post('/admin/home', [Admin\AspirasiController::class, 'show'])->name('show.filter.aspirasi');
+    Route::post('/admin/home', [Admin\AspirasiController::class, 'store'])->name('update.laporan');
 
     Route::get('/admin/kategori', [Admin\KategoriController::class, 'index'])->name('show.kategori');
     Route::post('/admin/kategori', [Admin\KategoriController::class, 'store'])->name('add.kategori');
@@ -28,6 +28,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::put('/admin/daftar-admin/{id}', [Admin\AdminManageController::class, 'update'])->name('update.admin');
     Route::delete('/admin/daftar-admin/{id}', [Admin\AdminManageController::class, 'destroy'])->name('delete.admin');
 });
+
 Route::middleware('auth:siswa')->group(function(){
     Route::get('/siswa/home', [Siswa\AspirasiController::class, 'index'])->name('show.home.siswa');
     Route::post('/siswa/home', [SIswa\AspirasiController::class, 'store'])->name('add.laporan');

@@ -21,12 +21,14 @@
                 </div>
 
                 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl px-4 py-2 text-center hidden sm:block">
-                    <span class="text-lg font-extrabold text-blue-600">3</span>
+                    <span class="text-lg font-extrabold text-blue-600">
+                        {{ $history->count() }}
+                    </span>
                     <p class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider -mt-0.5">Laporan</p>
                 </div>
             </div>
 
-            {{-- FILTER --}}
+            {{-- FILTER
             <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
                 @foreach([
                     ['label' => 'Semua', 'count' => '3', 'active' => true],
@@ -45,64 +47,50 @@
                     </span>
                 </button>
                 @endforeach
-            </div>
-
-            {{-- DUMMY DATA --}}
-            @php
-            $laporans = [
-                [
-                    'id' => 'LPR-001',
-                    'kategori' => 'Fasilitas Sekolah',
-                    'lokasi' => 'Toilet Lantai 2, Gedung B',
-                    'laporan' => 'Kran air rusak...',
-                    'status' => 'Selesai',
-                    'feedback' => 'Sudah diperbaiki.',
-                    'tanggal' => '08 April 2026',
-                    'selesai' => '10 April 2026',
-                ],
-                [
-                    'id' => 'LPR-002',
-                    'kategori' => 'Keamanan',
-                    'lokasi' => 'Parkiran',
-                    'laporan' => 'Parkir tidak rapi...',
-                    'status' => 'Proses',
-                    'feedback' => 'Sedang ditindak.',
-                    'tanggal' => '12 April 2026',
-                    'selesai' => null,
-                ],
-            ];
-            @endphp
+            </div> --}}
 
             {{-- LIST --}}
-            @foreach($laporans as $item)
+            @foreach($history as $item)
             <div class="bg-white border border-gray-100 rounded-2xl shadow-sm p-5 space-y-3">
 
                 <div class="flex justify-between">
                     <div>
-                        <p class="text-xs font-bold text-gray-700">{{ $item['kategori'] }}</p>
+                        <p class="text-lg font-bold text-gray-700">{{ $item->input_aspirasi->kategori->ket_kategori }}</p>
                     </div>
 
                     <span class="text-xs font-bold px-2 py-2 rounded-xl
-                        {{ $item['status'] == 'Selesai' ? 'bg-emerald-100 text-emerald-600' : '' }}
-                        {{ $item['status'] == 'Proses' ? 'bg-indigo-100 text-indigo-600' : '' }}">
-                        {{ $item['status'] }}
+                        {{ $item->status == 'Selesai' ? 'bg-emerald-100 text-emerald-600' : '' }}
+                        {{ $item->status == 'Proses' ? 'bg-indigo-100 text-indigo-600' : '' }}">
+                        {{ $item->status }}
                     </span>
                 </div>
 
-                <p class="text-sm text-gray-600">{{ $item['laporan'] }}</p>
+                <p class="text-sm text-gray-600">{{ $item->input_aspirasi->keterangan }}</p>
 
                 <div class="bg-slate-200 px-4 py-4 rounded-xl shadow-md">
                     <p class="text-md font-bold">Feedback:</p>
-                    <p class="text-sm text-gray-600">{{ $item['feedback'] }}</p>
+                    <p class="text-sm text-gray-600">{{ $item->feedback }} ({{ $item->admin->username }})</p>
                 </div>
 
                 <div class="text-xs text-gray-400">
-                    {{ $item['tanggal'] }}
+                    {{ $item->updated_at }}
                 </div>
 
             </div>
             @endforeach
-
+            {{-- EMPTY STATE (hidden by default, tampil saat tidak ada data) --}}
+        {{-- Uncomment untuk preview empty state:
+        <div class="bg-white border border-gray-100 rounded-2xl shadow-sm p-12 text-center">
+            <div class="w-16 h-16 bg-gray-50 border border-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                </svg>
+            </div>
+            <p class="text-sm font-bold text-gray-500">Belum Ada Laporan</p>
+            <p class="text-xs text-gray-400 mt-1">Kamu belum pernah mengirim laporan apapun.</p>
+        </div>
+        --}}
         </div>
     </div>
 </div>
