@@ -6,7 +6,7 @@
     {{-- HEADER --}}
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-600 shadow-md shadow-blue-200 flex items-center justify-center flex-shrink-0">
+            <div class="w-10 h-10 rounded-xl bg-primary shadow-md shadow-primary/25 flex items-center justify-center flex-shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
@@ -16,7 +16,7 @@
                 <p class="text-xs text-gray-400 font-medium">Kelola semua laporan siswa</p>
             </div>
         </div>
-        <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100 self-start sm:self-center">
+        <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-primary/5 text-primary border border-primary/20 self-start sm:self-center">
             {{ $laporan->count() }} Laporan Ditemukan
         </span>
     </div>
@@ -24,7 +24,7 @@
     {{-- FILTER SECTION --}}
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
         <div class="flex items-center space-x-2 mb-4">
-            <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
+            <div class="w-1 h-5 bg-primary rounded-full"></div>
             <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Filter Laporan</h2>
         </div>
         
@@ -33,12 +33,12 @@
                 <div class="space-y-1">
                     <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Tanggal</label>
                     <input type="date" name="tanggal"
-                        class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500 transition-all">
+                        class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 focus:ring-2 focus:ring-primary transition-all">
                 </div>
     
                 <div class="space-y-1">
                     <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Kategori</label>
-                    <select name="kategori" class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500 transition-all">
+                    <select name="kategori" class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 focus:ring-2 focus:ring-primary transition-all">
                         <option>Semua Kategori</option>
                         @foreach ($kategori as $item)
                             <option value="{{ $item->id_kategori }}">{{ $item->ket_kategori }}</option>
@@ -47,7 +47,7 @@
                 </div>
     
                 <div class="flex items-end">
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl shadow-md shadow-blue-100 transition-all duration-150">
+                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white text-sm font-semibold py-2.5 rounded-xl shadow-md shadow-primary/25 transition-all duration-150">
                         Terapkan Filter
                     </button>
                 </div>
@@ -74,7 +74,7 @@
         {{-- Table Header Bar --}}
         <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-gray-50/30">
             <div class="flex items-center space-x-2">
-                <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
+                <div class="w-1 h-5 bg-primary rounded-full"></div>
                 <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Data Laporan Siswa</h2>
             </div>
         </div>
@@ -93,11 +93,11 @@
 
                 <tbody class="divide-y divide-gray-50">
                     @foreach ($laporan as $item)
-                        <tr class="group hover:bg-blue-50/40 transition-colors duration-150">
+                        <tr class="group hover:bg-primary/10 transition-colors duration-150">
                             <td class="px-6 py-4">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-xs uppercase">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <div class="w-9 h-9 rounded-xl bg-primary/5 flex items-center justify-center text-primary font-bold text-xs uppercase">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0M12 2a10 10 0 100 20 10 10 0 000-20z"/>
                                         </svg>
                                     </div>
@@ -124,7 +124,7 @@
                                 @csrf
                                 <td class="px-6 py-4">
                                     <input type="hidden" name="id_pelaporan" value="{{ $item->id_pelaporan }}">
-                                    <select name="status" class="p-2 bg-gray-50 text-gray-400 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors border border-gray-100">
+                                    <select name="status" class="p-2 bg-gray-50 text-gray-400 rounded-lg hover:bg-primary/10 transition-colors border border-gray-100">
                                         @foreach ($statusList as $status)
                                             <option value="{{ $status }}"
                                                 {{ ($item->aspirasi->status ?? '') == $status ? 'selected' : '' }}>
@@ -135,8 +135,8 @@
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <div class="flex justify-end gap-2">
-                                        <input type="text" name="feedback" placeholder="Masukkan feedback" class="p-2 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border border-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                                        <button class="p-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl shadow-md shadow-blue-100 transition-all duration-150">
+                                        <input type="text" name="feedback" placeholder="Masukkan feedback" class="p-2 bg-gray-50 rounded-lg hover:bg-primary/10 transition-colors border border-gray-100 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <button class="p-2 bg-primary hover:bg-primary/90 text-white text-sm font-semibold py-2.5 rounded-xl shadow-md shadow-primary/25 transition-all duration-150">
                                             Update
                                         </button>
                                     </div>

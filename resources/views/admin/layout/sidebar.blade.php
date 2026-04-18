@@ -2,7 +2,7 @@
 <div x-data="{ open: false }" class="relative">
 
     {{-- Mobile Toggle Button --}}
-    <button @click="open = true" class="md:hidden fixed top-4 left-4 z-50 p-2.5 bg-white rounded-xl shadow-lg border border-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">
+    <button @click="open = true" class="md:hidden fixed top-4 left-4 z-50 p-2.5 bg-white rounded-xl shadow-lg border border-gray-100 text-gray-700 hover:bg-primary/5 hover:text-primary/50 transition-all duration-200">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -30,7 +30,7 @@
 
         {{-- Logo --}}
         <div class="flex items-center space-x-3 px-6 py-5 border-b border-gray-100">
-            <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shadow-md shadow-blue-200 flex-shrink-0">
+            <div class="w-9 h-9 bg-primary rounded-xl flex items-center justify-center shadow-md shadow-primary/25 flex-shrink-0">
                 <svg class="w-5 h-5 text-white group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01"/>
                 </svg>
@@ -46,10 +46,10 @@
         </div>
 
         {{-- User Greeting --}}
-        <div class="px-5 py-4 mx-4 mt-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100">
+        <div class="px-5 py-4 mx-4 mt-4 rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/20">
             <p class="text-xs text-gray-400 font-medium uppercase tracking-widest mb-0.5">Halo,</p>
             @auth('admin')
-                <p class="text-sm font-bold text-blue-700 truncate">{{ Auth::guard('admin')->user()->username }}👋</p>
+                <p class="text-sm font-bold text-primary truncate">{{ Auth::guard('admin')->user()->username }}👋</p>
             @endauth
         </div>
 
@@ -58,36 +58,36 @@
 
             <p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400 px-3 mb-2">Menu Utama</p>
 
-            <a href="{{ route('show.home.admin') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-all duration-150 group">
-                <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a href="{{ route('show.home.admin') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
+                <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary/10 flex items-center justify-center transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h13M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h4M13 7l5 5-5 5"/>
                     </svg>
                 </span>
                 <span>Daftar Laporan</span>
             </a>
 
-            <a href="{{ route('show.kategori') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-all duration-150 group">
-                <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a href="{{ route('show.kategori') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
+                <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary/10 flex items-center justify-center transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a2 2 0 014-4z"/>
                     </svg>
                 </span>
                 <span>Kategori</span>
             </a>
 
-            <a href="{{ route('show.siswa') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-all duration-150 group">
-                <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a href="{{ route('show.siswa') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
+                <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary/10 flex items-center justify-center transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
                 </span>
                 <span>Siswa</span>
             </a>
 
-            <a href="{{ route('show.admin') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-all duration-150 group">
-                <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a href="{{ route('show.admin') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
+                <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary/10 flex items-center justify-center transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0M12 2a10 10 0 100 20 10 10 0 000-20z"/>
                     </svg>
                 </span>

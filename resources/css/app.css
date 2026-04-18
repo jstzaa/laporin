@@ -8,4 +8,8 @@
 
 @theme {
     --font-sans: 'Plus Jakarta Sans';
+    --color-primary: #2185D5;
+    --color-secondary: #3A4750;
+    --color-dark: #303841;
+    --color-light: #F3F3F3;
 }

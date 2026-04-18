@@ -5,7 +5,7 @@
 
     {{-- HEADER --}}
     <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-blue-600 shadow-md shadow-blue-200 flex items-center justify-center flex-shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-primary shadow-md shadow-primary/25 flex items-center justify-center flex-shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0M12 2a10 10 0 100 20 10 10 0 000-20z"/>
             </svg>
@@ -19,7 +19,7 @@
     {{-- FORM TAMBAH ADMIN --}}
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
         <div class="flex items-center space-x-2 mb-4">
-            <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
+            <div class="w-1 h-5 bg-primary rounded-full"></div>
             <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Tambah Admin Baru</h2>
         </div>
         <form method="POST" action="{{ route('add.admin') }}"
@@ -28,11 +28,11 @@
             <input type="text" name="username"
                    placeholder="Masukkan username admin..."
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
-                          placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                          placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                           transition-all duration-150">
             <button type="submit"
-                    class="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700
-                           text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-blue-200
+                    class="flex items-center justify-center space-x-2 bg-primary hover:bg-primary/90
+                           text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-primary/25
                            transition-all duration-150 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -62,7 +62,7 @@
         {{-- Table Header Bar --}}
         <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
             <div class="flex items-center space-x-2">
-                <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
+                <div class="w-1 h-5 bg-primary rounded-full"></div>
                 <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Daftar Admin</h2>
             </div>
             <span class="text-xs text-gray-400 font-medium">{{ $admin->total() }} akun terdaftar</span>
@@ -79,7 +79,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-50">
                     @foreach ($admin as $item)
-                        <tr class="hover:bg-blue-50/40 transition-colors duration-100">
+                        <tr class="hover:bg-primary/5 transition-colors duration-100">
 
                             {{-- No --}}
                             <td class="px-5 py-3.5">
@@ -91,8 +91,8 @@
                             {{-- Username --}}
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center flex-shrink-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0M12 2a10 10 0 100 20 10 10 0 000-20z"/>
                                         </svg>
                                     </div>

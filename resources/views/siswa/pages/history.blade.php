@@ -8,7 +8,7 @@
             {{-- PAGE HEADER --}}
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-blue-600 shadow-md shadow-blue-200 flex items-center justify-center flex-shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-primary shadow-md shadow-primary/25 flex items-center justify-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl px-4 py-2 text-center hidden sm:block">
-                    <span class="text-lg font-extrabold text-blue-600">
+                    <span class="text-lg font-extrabold text-primary">
                         {{ $history->count() }}
                     </span>
                     <p class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider -mt-0.5">Laporan</p>
@@ -38,8 +38,8 @@
                 ] as $filter)
                 <button class="flex-shrink-0 flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold border
                     {{ $filter['active']
-                        ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-200'
-                        : 'bg-white text-gray-500 border-gray-200 hover:border-blue-200 hover:text-blue-600' }}">
+                        ? 'bg-primary text-white border-primary shadow-md shadow-primary'
+                        : 'bg-white text-gray-500 border-gray-200 hover:border-primary hover:text-primary' }}">
                     <span>{{ $filter['label'] }}</span>
                     <span class="inline-flex items-center justify-center w-4 h-4 rounded-full text-[10px] font-bold
                         {{ $filter['active'] ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500' }}">

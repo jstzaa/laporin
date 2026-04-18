@@ -5,7 +5,7 @@
 
     {{-- HEADER --}}
     <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-blue-600 shadow-md shadow-blue-200 flex items-center justify-center flex-shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-primary shadow-md shadow-primary/25 flex items-center justify-center flex-shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
@@ -19,7 +19,7 @@
     {{-- FORM TAMBAH KATEGORI --}}
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
         <div class="flex items-center space-x-2 mb-4">
-            <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
+            <div class="w-1 h-5 bg-primary rounded-full"></div>
             <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Tambah Kategori Baru</h2>
         </div>
         <form method="POST" action="{{ route('add.kategori') }}" class="flex flex-col sm:flex-row gap-3">
@@ -29,15 +29,15 @@
                     placeholder="Contoh: Sarana & Prasarana"
                     value="{{ old('ket_kategori') }}"
                     class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
-                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                            transition-all duration-150 @error('ket_kategori') border-red-500 @enderror">
                 @error('ket_kategori')
                     <p class="text-red-500 text-xs mt-1.5 ml-1">{{ $message }}</p>
                 @enderror
             </div>
             <button type="submit"
-                class="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700
-                       text-white text-sm font-semibold px-8 py-2.5 rounded-xl shadow-md shadow-blue-200
+                class="flex items-center justify-center space-x-2 bg-primary hover:bg-primary/90
+                       text-white text-sm font-semibold px-8 py-2.5 rounded-xl shadow-md shadow-primary/25
                        transition-all duration-150 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -67,7 +67,7 @@
         {{-- Table Header Bar --}}
         <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
             <div class="flex items-center space-x-2">
-                <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
+                <div class="w-1 h-5 bg-primary rounded-full"></div>
                 <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Daftar Kategori</h2>
             </div>
             <span class="text-xs text-gray-400 font-medium">{{ $kategori->total() }} kategori terdaftar</span>
@@ -84,7 +84,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-50">
                     @foreach ($kategori as $item)
-                        <tr class="hover:bg-blue-50/40 transition-colors duration-100">
+                        <tr class="hover:bg-primary/10 transition-colors duration-100">
                             {{-- No --}}
                             <td class="px-5 py-3.5">
                                 <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gray-100 text-gray-500 text-xs font-bold">
