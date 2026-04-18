@@ -31,7 +31,7 @@ Route::middleware('auth:admin')->group(function(){
 
 Route::middleware('auth:siswa')->group(function(){
     Route::get('/siswa/home', [Siswa\AspirasiController::class, 'index'])->name('show.home.siswa');
-    Route::post('/siswa/home', [SIswa\AspirasiController::class, 'store'])->name('add.laporan');
+    Route::post('/siswa/home', [Siswa\AspirasiController::class, 'store'])->name('add.laporan');
     Route::get('/siswa/history', [Siswa\AspirasiController::class, 'showHistory'])->name('show.history.siswa');
 });
     
