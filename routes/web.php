@@ -35,6 +35,9 @@ Route::middleware('auth:siswa')->group(function(){
     Route::get('/siswa/history', [Siswa\AspirasiController::class, 'showHistory'])->name('show.history.siswa');
 });
     
-Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware('guest.multi')->group(function(){
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+});
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth:admin,siswa');

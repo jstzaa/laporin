@@ -46,7 +46,9 @@ class AuthController extends Controller
 
     // Fungsi logout
     public function logout(Request $request){
-        Auth::logout();
+        Auth::guard('admin')->logout();
+        Auth::guard('siswa')->logout();
+        
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
