@@ -13,7 +13,7 @@
             </div>
             <div>
                 <h1 class="text-xl font-extrabold text-gray-800 tracking-tight">Daftar Laporan</h1>
-                <p class="text-xs text-gray-400 font-medium">Kelola semua laporan laporan siswa</p>
+                <p class="text-xs text-gray-400 font-medium">Kelola semua laporan siswa</p>
             </div>
         </div>
         <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100 self-start sm:self-center">
