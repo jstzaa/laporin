@@ -55,25 +55,27 @@
 
                 <div class="flex justify-between">
                     <div>
-                        <p class="text-lg font-bold text-gray-700">{{ $item->input_aspirasi->kategori->ket_kategori }}</p>
+                        <p class="text-lg font-bold text-gray-700">{{ $item->kategori->ket_kategori }}</p>
                     </div>
 
                     <span class="text-xs font-bold px-2 py-2 rounded-xl
-                        {{ $item->status == 'Selesai' ? 'bg-emerald-100 text-emerald-600' : '' }}
-                        {{ $item->status == 'Proses' ? 'bg-indigo-100 text-indigo-600' : '' }}">
-                        {{ $item->status }}
+                        {{ $item->aspirasi?->status == 'Selesai' ? 'bg-emerald-100 text-emerald-600' : '' }}
+                        {{ $item->aspirasi?->status == 'Proses' ? 'bg-indigo-100 text-indigo-600' : '' }}
+                        {{ $item->aspirasi?->status == 'Menunggu' ? 'bg-amber-100 text-amber-600' : '' }}
+                        {{ $item->aspirasi?->status ?? 'bg-amber-100 text-amber-600' }}">
+                        {{ $item->aspirasi?->status ?? 'Menunggu' }}
                     </span>
                 </div>
 
-                <p class="text-sm text-gray-600">{{ $item->input_aspirasi->keterangan }}</p>
+                <p class="text-sm text-gray-600">{{ $item->keterangan }}</p>
 
                 <div class="bg-slate-200 px-4 py-4 rounded-xl shadow-md">
                     <p class="text-md font-bold">Feedback:</p>
-                    <p class="text-sm text-gray-600">{{ $item->feedback }} ({{ $item->admin->username }})</p>
+                    <p class="text-sm text-gray-600">{{ $item->aspirasi?->feedback }} ({{ $item->aspirasi?->admin->username ?? 'Menunggu feedback admin' }})</p>
                 </div>
 
                 <div class="text-xs text-gray-400">
-                    {{ $item->updated_at }}
+                    {{ $item->aspirasi?->updated_at }}
                 </div>
 
             </div>

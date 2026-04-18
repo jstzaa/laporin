@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Models\Kategori;
-use App\Models\Aspirasi;
 use App\Models\InputAspirasi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -22,10 +21,8 @@ class AspirasiController extends Controller
 
     public function showHistory()
     {
-        $history = Aspirasi::with(['input_aspirasi', 'admin'])
-                    ->whereHas('input_aspirasi', function ($q) {
-                        $q->where('id_siswa', Auth::guard('siswa')->user()->id_siswa);
-                    })
+        $history = InputAspirasi::with('aspirasi')
+                    ->where('id_siswa', Auth::guard('siswa')->user()->id_siswa)
                     ->orderBy('updated_at', 'desc')
                     ->paginate(10);
 
