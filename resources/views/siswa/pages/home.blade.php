@@ -65,7 +65,7 @@
                             <span class="text-red-400">*</span>
                         </label>
                         <div class="relative">
-                            <select name="kategori" class="w-full appearance-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-3
+                            <select name="kategori" required class="w-full appearance-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-3
                                            text-sm text-gray-700 font-medium focus:outline-none focus:ring-2
                                            focus:ring-primary focus:border-transparent transition-all duration-150 pr-10">
                                 <option value="" disabled selected class="text-gray-400">Pilih kategori laporan...</option>
@@ -97,7 +97,7 @@
                             <span class="text-red-400">*</span>
                         </label>
                         <div class="relative">
-                            <input type="text" name="lokasi"
+                            <input type="text" name="lokasi" required
                                    placeholder="Contoh: Kelas XII-A, Kantin, Lapangan..."
                                    class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 pl-10
                                           text-sm text-gray-700 placeholder-gray-400 font-medium
@@ -126,7 +126,7 @@
                             <span>Isi Laporan</span>
                             <span class="text-red-400">*</span>
                         </label>
-                        <textarea rows="5" name="keterangan"
+                        <textarea rows="5" name="keterangan" required
                                   placeholder="Deskripsikan masalah yang ingin kamu laporkan secara detail. Semakin jelas laporanmu, semakin cepat bisa ditindaklanjuti..."
                                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3
                                          text-sm text-gray-700 placeholder-gray-400 font-medium
