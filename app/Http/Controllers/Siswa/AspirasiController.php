@@ -24,7 +24,7 @@ class AspirasiController extends Controller
      */
     public function showHistory()
     {
-        $history = InputAspirasi::with('aspirasi')
+        $history = InputAspirasi::with('aspirasi.admin','kategori')
                     ->where('id_siswa', Auth::guard('siswa')->user()->id_siswa)
                     ->orderBy('updated_at', 'desc')
                     ->paginate(10);
