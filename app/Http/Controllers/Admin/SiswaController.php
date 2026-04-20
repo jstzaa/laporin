@@ -40,6 +40,15 @@ class SiswaController extends Controller
     }
 
     /**
+     * Menampilkan form edit.
+     */
+    public function edit($id_siswa)
+    {
+        $siswa = Siswa::select('id_siswa', 'nama_siswa', 'nis', 'kelas')->where('id_siswa', $id_siswa)->firstOrFail();
+        return view('admin.pages.edit_siswa', compact('siswa'));
+    }
+
+    /**
      * Memperbarui data siswa.
      */
     public function update(Request $request, $id_siswa)
@@ -63,7 +72,7 @@ class SiswaController extends Controller
 
         $siswa->update($validated);
 
-        return redirect()->back()->with('success', 'Data siswa berhasil diedit');
+        return redirect()->route('show.siswa')->with('success', 'Data siswa berhasil diedit');
     }
 
     /**

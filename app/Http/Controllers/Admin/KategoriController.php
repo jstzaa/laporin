@@ -31,6 +31,16 @@ class KategoriController extends Controller
     }
 
     /**
+     * Menampilkan form edit.
+     */
+    public function edit($id_kategori)
+    {
+        $kategori = Kategori::select('id_kategori', 'ket_kategori')->where('id_kategori', $id_kategori)->firstOrFail();
+        return view('admin.pages.edit_kategori', compact('kategori'));
+    }
+
+
+    /**
      * Memperbarui data kategori.
      */
     public function update(Request $request, $id_kategori)

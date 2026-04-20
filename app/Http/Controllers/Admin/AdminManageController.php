@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminManageController extends Controller
 {
@@ -37,12 +38,22 @@ class AdminManageController extends Controller
     }
 
     /**
+     * Menampilkan form edit.
+     */
+    public function edit($id_admin)
+    {
+        $admin = Admin::select('id_admin', 'username')->where('id_admin', $id_admin)->firstOrFail();
+        return view('admin.pages.edit_admin', compact('admin'));
+    }
+
+    /**
      * Memperbarui data admin.
      */
     public function update(Request $request, $id_admin)
     {
         $validated = $request->validate([
-            'username' => 'required|max:255|unique:admins,username,' . $id_admin . ',id_admin'
+            'username' => 'required|max:255|unique:admins,username,' . $id_admin . ',id_admin',
+            'password' => 'nullable|string|min:8'
         ],[
             'username.unique' => 'Admin dengan username ini sudah terdaftar, masukkan username baru!'
         ]);
@@ -57,7 +68,7 @@ class AdminManageController extends Controller
 
         $admin->update($validated);
 
-        return redirect()->back()->with('success', 'Data admin berhasil diedit');
+        return redirect()->route('show.admin')->with('success', 'Data admin berhasil diedit');
     }
 
     /**
@@ -65,6 +76,10 @@ class AdminManageController extends Controller
      */
     public function destroy($id_admin)
     {
+        if (Auth::guard('admin')->user()->id_admin == $id_admin) {
+            return redirect()->back()->with('error', 'Tidak bisa menghapus akun sendiri!');
+        }
+        
         Admin::findOrFail($id_admin)->delete();
 
         return redirect()->back()->with('success', 'Data admin berhasil dihapus');
