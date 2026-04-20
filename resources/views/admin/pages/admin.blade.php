@@ -25,11 +25,12 @@
         <form method="POST" action="{{ route('add.admin') }}"
               class="flex flex-col sm:flex-row gap-3">
             @csrf
-            <input type="text" name="username"
+            <input type="text" name="username" required
                    placeholder="Masukkan username admin..."
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                          transition-all duration-150">
+                          transition-all duration-150
+                          @error('admin') border-red-300 bg-red-50 focus:ring-red-400 @enderror">
             <button type="submit"
                     class="flex items-center justify-center space-x-2 bg-primary hover:bg-primary/90
                            text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-primary/25

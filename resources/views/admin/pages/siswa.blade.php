@@ -24,15 +24,15 @@
         </div>
         <form method="POST" action="{{ route('add.siswa') }}" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
             @csrf
-            <input type="text" name="nama_siswa" placeholder="Nama siswa"
+            <input type="text" name="nama_siswa" placeholder="Nama siswa" required
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 
                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
             
-            <input type="text" name="nis" placeholder="NIS"
+            <input type="text" name="nis" placeholder="NIS" required
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 
                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
             
-            <input type="text" name="kelas" placeholder="Kelas"
+            <input type="text" name="kelas" placeholder="Kelas" required
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 
                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
 
