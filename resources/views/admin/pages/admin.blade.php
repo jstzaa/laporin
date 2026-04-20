@@ -29,8 +29,7 @@
                    placeholder="Masukkan username admin..."
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                          transition-all duration-150
-                          @error('admin') border-red-300 bg-red-50 focus:ring-red-400 @enderror">
+                          transition-all duration-150">
             <button type="submit"
                     class="flex items-center justify-center space-x-2 bg-primary hover:bg-primary/90
                            text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-primary/25
@@ -41,6 +40,17 @@
                 <span>Tambah Admin</span>
             </button>
         </form>
+        @error('username')
+            <div id="err-msg" class="flex items-center space-x-1.5 text-xs text-red-500 font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+                </svg>
+                <span>{{ $message }}</span>
+            </div>
+            <script>
+                setTimeout(() => { document.getElementById('err-msg')?.remove(); }, 3000);
+            </script>
+        @enderror
     </div>
 
     {{-- SUCCESS ALERT --}}
@@ -149,7 +159,7 @@
 
         {{-- ======================== MODAL EDIT ======================== --}}
         <div
-            x-data="{ open: {{ $errors->any() ? 'true' : 'false' }}, id: null, username: '', password: '' }"
+            x-data="{ open: false, id: null, username: '', password: '' }"
             x-show="open"
             x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0"
