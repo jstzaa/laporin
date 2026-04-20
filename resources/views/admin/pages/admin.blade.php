@@ -67,6 +67,20 @@
         </script>
     @endif
 
+    {{-- Error alert --}}
+    @if (session('error'))
+        <div id="alert-error"
+             class="flex items-center space-x-3 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span><strong class="font-semibold">Error!</strong> {{ session('error') }}</span>
+        </div>
+        <script>
+            setTimeout(() => { document.getElementById('alert-error')?.remove(); }, 3000);
+        </script>
+    @endif
+
     {{-- TABLE --}}
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
 
@@ -114,12 +128,7 @@
                             {{-- Aksi --}}
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-2">
-                                    <button
-                                        @click="$dispatch('open-edit', {
-                                            id: '{{ $item->id_admin }}',
-                                            username: '{{ $item->username }}',
-                                            password: ''
-                                        })"
+                                    <a href="{{ route('show.edit.admin', ['id' => $item->id_admin]) }}"
                                         class="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100
                                                text-amber-600 hover:text-amber-700 text-xs font-semibold rounded-lg
                                                border border-amber-200 transition-all duration-150">
@@ -127,7 +136,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>
                                         <span>Edit</span>
-                                    </button>
+                                    </a>
 
                                     <button
                                         @click="$dispatch('open-delete', {
@@ -156,93 +165,6 @@
                 {{ $admin->links() }}
             </div>
         @endif
-
-        {{-- ======================== MODAL EDIT ======================== --}}
-        <div
-            x-data="{ open: false, id: null, username: '', password: '' }"
-            x-show="open"
-            x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-150"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            x-cloak
-            @open-edit.window="
-                open = true;
-                id = $event.detail.id;
-                username = $event.detail.username;
-                password = $event.detail.password;
-            "
-            class="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style="background: rgba(15,23,42,0.45); backdrop-filter: blur(4px);"
-        >
-            <div
-                @click.away="open = false"
-                x-transition:enter="transition ease-out duration-200"
-                x-transition:enter-start="opacity-0 scale-95"
-                x-transition:enter-end="opacity-100 scale-100"
-                class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6"
-            >
-                {{-- Modal Header --}}
-                <div class="flex items-center justify-between mb-5">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                            </svg>
-                        </div>
-                        <h2 class="text-base font-bold text-gray-800">Edit Admin</h2>
-                    </div>
-                    <button @click="open = false"
-                            class="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-
-                <form method="POST" :action="'/admin/daftar-admin/' + id">
-                    @method('PUT')
-                    @csrf
-                    <input type="hidden" name="id_siswa" :value="id">
-
-                    <div class="space-y-4 mb-5">
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Username</label>
-                            <input type="text" name="username" x-model="username"
-                                   placeholder="Masukkan username admin"
-                                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
-                                          placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400
-                                          focus:border-transparent transition-all duration-150">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
-                                Password Baru
-                                <span class="normal-case font-normal text-gray-400">(Opsional)</span>
-                            </label>
-                            <input type="password" name="password" minlength="8" x-model="password"
-                                   placeholder="Masukkan password baru"
-                                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
-                                          placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400
-                                          focus:border-transparent transition-all duration-150">
-                        </div>
-                    </div>
-
-                    <div class="flex gap-2 pt-4 border-t border-gray-100">
-                        <button type="button" @click="open = false"
-                                class="flex-1 px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-semibold rounded-xl transition">
-                            Batal
-                        </button>
-                        <button type="submit"
-                                class="flex-1 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold
-                                       rounded-xl shadow-md shadow-amber-200 transition">
-                            Simpan Perubahan
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
 
         {{-- ======================== MODAL HAPUS ======================== --}}
         <div
@@ -300,7 +222,7 @@
                 <form method="POST" :action="'/admin/daftar-admin/' + id">
                     @method('DELETE')
                     @csrf
-                    <input type="hidden" name="id_kategori" :value="id">
+                    <input type="hidden" name="id_admin" :value="id">
 
                     <div class="flex gap-2">
                         <button type="button" @click="open = false"

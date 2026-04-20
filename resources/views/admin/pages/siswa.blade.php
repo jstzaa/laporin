@@ -129,20 +129,13 @@
                             {{-- Aksi --}}
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-2">
-                                    <button 
-                                        @click="$dispatch('open-edit', { 
-                                            id: '{{ $item->id_siswa }}', 
-                                            nama: '{{ $item->nama_siswa }}', 
-                                            nis: '{{ $item->nis }}', 
-                                            kelas: '{{ $item->kelas }}', 
-                                            password: '' 
-                                        })"
+                                    <a href="{{ route('show.edit.siswa', ['id' => $item->id_siswa]) }}"
                                         class="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-600 text-xs font-semibold rounded-lg border border-amber-200 transition-all">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>
                                         <span>Edit</span>
-                                    </button>
+                                    </a>
 
                                     <button 
                                         @click="$dispatch('open-delete', { 
@@ -169,89 +162,6 @@
                 {{ $siswa->links() }}
             </div>
         @endif
-    </div>
-
-    {{-- MODAL EDIT --}}
-    <div 
-        x-data="{ open: false, id: null, nama: '', nis: '', kelas: '', password: '' }"
-        x-show="open"
-        x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-150"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        x-cloak
-        @open-edit.window="
-            open = true;
-            id = $event.detail.id;
-            nama = $event.detail.nama;
-            nis = $event.detail.nis;
-            kelas = $event.detail.kelas;
-            password = $event.detail.password;
-        "
-        class="fixed h-screen inset-0 z-50 flex items-center justify-center p-4"
-        style="background: rgba(15,23,42,0.45); backdrop-filter: blur(4px);"
-    >
-        <div @click.away="open = false" class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
-            <div class="flex items-center justify-between mb-5">
-                <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                        </svg>
-                    </div>
-                    <h2 class="text-base font-bold text-gray-800">Edit Data Siswa</h2>
-                </div>
-                <button @click="open = false" class="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-
-            <form method="POST" :action="'/admin/daftar-siswa/' + id">
-                @method('PUT')
-                @csrf
-                <input type="hidden" name="id_siswa" :value="id">
-
-                <div class="space-y-4 mb-6 text-left">
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama Lengkap</label>
-                        <input type="text" name="nama_siswa" x-model="nama"
-                               class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none transition-all">
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">NIS</label>
-                            <input type="text" name="nis" x-model="nis"
-                                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Kelas</label>
-                            <input type="text" name="kelas" x-model="kelas"
-                                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none transition-all">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Password Baru <span class="normal-case font-normal">(Opsional)</span></label>
-                        <input type="password" name="password" minlength="8" x-model="password" placeholder="••••••••"
-                               class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none transition-all">
-                    </div>
-                </div>
-
-                <div class="flex gap-2">
-                    <button type="button" @click="open = false"
-                            class="flex-1 px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-semibold rounded-xl transition">
-                        Batal
-                    </button>
-                    <button type="submit"
-                            class="flex-1 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-xl shadow-md shadow-amber-200 transition">
-                        Simpan Perubahan
-                    </button>
-                </div>
-            </form>
-        </div>
     </div>
 
     {{-- MODAL HAPUS --}}
@@ -290,7 +200,7 @@
             <form method="POST" :action="'/admin/daftar-siswa/' + id">
                 @method('DELETE')
                 @csrf
-                <input type="hidden" name="id_kategori" :value="id">
+                <input type="hidden" name="id_siswa" :value="id">
 
                 <div class="flex gap-2">
                     <button type="button" @click="open = false"
