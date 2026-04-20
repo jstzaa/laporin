@@ -49,7 +49,7 @@ class AdminManageController extends Controller
 
         $admin->update($validated);
 
-        return redirect()->back()->with('success', 'Data admin berhasil diedit')->withErrors(['admin' => 'Kolom harus diisi']);
+        return redirect()->back()->with('success', 'Data admin berhasil diedit');
     }
 
     /**
