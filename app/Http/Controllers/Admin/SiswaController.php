@@ -27,6 +27,8 @@ class SiswaController extends Controller
             'nama_siswa' => 'required|max:255',
             'nis' => 'required|max:255|unique:siswas,nis',
             'kelas' => 'required|max:255',
+        ],[
+            'nis.unique' => 'NIS sudah digunakan, gunakan NIS yang baru!'
         ]);
 
         $rawPassword = $request->nis . '@siswa.sch.id';
@@ -47,6 +49,8 @@ class SiswaController extends Controller
             'nis'        => 'required|string|max:255|unique:siswas,nis,' . $id_siswa . ',id_siswa',
             'kelas'      => 'required|string|max:255',
             'password'   => 'nullable|string|min:8'
+        ],[
+            'nis.unique' => 'NIS sudah digunakan, gunakan NIS yang baru!'
         ]);
 
         $siswa = Siswa::findOrFail($id_siswa);

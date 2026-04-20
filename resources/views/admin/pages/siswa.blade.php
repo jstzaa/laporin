@@ -24,7 +24,7 @@
         </div>
         <form method="POST" action="{{ route('add.siswa') }}" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
             @csrf
-            <input type="text" name="nama_siswa" placeholder="Nama siswa" required
+            <input type="text" name="nama_siswa" placeholder="Nama siswa" required value="{{ old('nama_siswa') }}"
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 
                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
             
@@ -32,7 +32,7 @@
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 
                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
             
-            <input type="text" name="kelas" placeholder="Kelas" required
+            <input type="text" name="kelas" placeholder="Kelas" required value="{{ old('kelas') }}"
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 
                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
 
@@ -45,6 +45,17 @@
                 <span>Simpan</span>
             </button>
         </form>
+        @error('nis')
+            <div id="err-msg" class="flex items-center space-x-1.5 text-xs text-red-500 font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+                </svg>
+                <span>{{ $message }}</span>
+            </div>
+            <script>
+                setTimeout(() => { document.getElementById('err-msg')?.remove(); }, 3000);
+            </script>
+        @enderror
     </div>
 
     {{-- SUCCESS ALERT --}}
@@ -162,7 +173,7 @@
 
     {{-- MODAL EDIT --}}
     <div 
-        x-data="{ open: {{ $errors->any() ? 'true' : 'false' }}, id: null, nama: '', nis: '', kelas: '', password: '' }"
+        x-data="{ open: false, id: null, nama: '', nis: '', kelas: '', password: '' }"
         x-show="open"
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0"
