@@ -165,7 +165,7 @@
 
             {{-- Subtext --}}
             <p class="text-base sm:text-lg text-gray-500 mb-10 max-w-xl mx-auto leading-relaxed load-reveal delay-3">
-                Sampaikan aspirasi, keluhan, atau saran kamu secara transparan. Setiap laporan didengar dan ditindaklanjuti dengan cepat.
+                Sampaikan keluhan, aspirasi, atau saran kamu langsung ke pihak sekolah. Setiap laporan tercatat, terpantau, dan ditindaklanjuti secara nyata.
             </p>
 
             {{-- CTA Buttons --}}
@@ -218,7 +218,7 @@
                         </svg>
                     </div>
                     <h3 class="text-base font-bold text-gray-800 mb-2">Input Pengaduan</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">Kirim laporan dengan mudah. Identitas kamu dijaga kerahasiaannya oleh sistem kami.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">Kirim laporan dengan mudah. Setiap laporan langsung masuk ke panel admin sekolah untuk segera ditindaklanjuti.</p>
                 </div>
 
                 {{-- Fitur 2 --}}
@@ -232,7 +232,7 @@
                         </svg>
                     </div>
                     <h3 class="text-base font-bold text-gray-800 mb-2">Histori Real-Time</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">Pantau status laporan dari <em>Menunggu</em>, <em>Proses</em>, hingga <em>Selesai</em> secara transparan.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">Pantau perkembangan laporanmu dari <em>Menunggu</em>, <em>Proses</em>, hingga <em>Selesai</em>. lengkap dengan feedback langsung dari admin.</p>
                 </div>
 
                 {{-- Fitur 3 --}}
@@ -268,10 +268,10 @@
 
                 @php
                     $steps = [
-                        ['num' => '1', 'title' => 'Tulis Laporan',   'desc' => 'Login dan sampaikan keluhanmu dengan data yang valid.',         'color' => 'blue'],
-                        ['num' => '2', 'title' => 'Verifikasi',      'desc' => 'Admin akan mengecek kebenaran dan relevansi laporan yang masuk.', 'color' => 'indigo'],
-                        ['num' => '3', 'title' => 'Tindak Lanjut',   'desc' => 'Laporan diteruskan ke pihak terkait untuk segera diselesaikan.', 'color' => 'violet'],
-                        ['num' => '✓', 'title' => 'Selesai',         'desc' => 'Masalah teratasi dan kamu bisa memantau perkembangannya.',        'color' => 'emerald'],
+                        ['num' => '1', 'title' => 'Tulis Laporan',    'desc' => 'Login dan sampaikan keluhan atau aspirasimu dengan jelas dan lengkap.',        'color' => 'blue'],
+                        ['num' => '2', 'title' => 'Admin Menerima',   'desc' => 'Laporan masuk ke panel admin sekolah dan segera ditinjau.', 'color' => 'indigo'],
+                        ['num' => '3', 'title' => 'Admin Merespons',  'desc' => 'Admin memperbarui status laporan dan mengirimkan feedback langsung kepadamu.', 'color' => 'violet'],
+                        ['num' => '✓', 'title' => 'Pantau Progress',  'desc' => 'Cek perkembangan laporanmu kapan saja melalui halaman Riwayat Laporan.',        'color' => 'emerald'],
                     ];
                 @endphp
 
@@ -332,7 +332,7 @@
                             Laporin! adalah platform digital yang dirancang untuk menjembatani komunikasi antara siswa dan pihak sekolah. Kami percaya bahwa setiap perubahan besar dimulai dari satu suara yang berani.
                         </p>
                         <p class="text-light text-sm leading-relaxed">
-                            Dibangun dengan teknologi modern untuk menjamin keamanan data dan kecepatan respon dari pihak sekolah.
+                            Dibangun dengan teknologi modern agar setiap laporan bisa tersampaikan, terpantau, dan diselesaikan dengan cepat oleh pihak sekolah.
                         </p>
                         <div class="mt-6 pt-5 border-t border-white/20">
                             <a href="{{ route('show.login') }}"
@@ -350,7 +350,7 @@
                 {{-- Right: Stats grid --}}
                 <div class="lg:col-span-2 grid grid-cols-2 gap-4">
                     @foreach([
-                        ['Safe',  'Data Terenkripsi',  'blue',    'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
+                        ['Safe',  'Akses Terkontrol',  'blue',    'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
                         ['Fast',  'Respon Cepat',      'amber',   'M13 10V3L4 14h7v7l9-11h-7z'],
                         ['Clean', 'UI Minimalis',      'indigo',  'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 110 2H5a1 1 0 01-1-1zm0 4a1 1 0 011-1h6a1 1 0 110 2H5a1 1 0 01-1-1z'],
                         ['Easy',  'Mudah Digunakan',   'emerald', 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
