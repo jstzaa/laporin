@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class AspirasiController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan halaman utama aspirasi dan dropdown kategori.
      */
     public function index()
     {
@@ -19,6 +19,9 @@ class AspirasiController extends Controller
         return view('siswa.pages.home', compact('kategori'));
     }
 
+    /**
+     * Menampilkan riwayat aspirasi siswa.
+     */
     public function showHistory()
     {
         $history = InputAspirasi::with('aspirasi')
@@ -30,7 +33,7 @@ class AspirasiController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan aspirasi baru.
      */
     public function store(Request $request)
     {

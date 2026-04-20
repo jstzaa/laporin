@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class AspirasiController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar aspirasi dan filter berdasarkan kategori dan tanggal.
      */
     public function index(Request $request)
     {
@@ -34,7 +34,7 @@ class AspirasiController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Memperbarui status dan feedback aspirasi.
      */
     public function store(Request $request)
     {

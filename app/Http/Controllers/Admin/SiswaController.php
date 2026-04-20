@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class SiswaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar siswa.
      */
     public function index()
     {
@@ -19,7 +19,7 @@ class SiswaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menambahkan siswa baru dan generate password.
      */
     public function store(Request $request)
     {
@@ -38,7 +38,7 @@ class SiswaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Memperbarui data siswa.
      */
     public function update(Request $request, $id_siswa)
     {
@@ -63,7 +63,7 @@ class SiswaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data siswa.
      */
     public function destroy($id_siswa)
     {

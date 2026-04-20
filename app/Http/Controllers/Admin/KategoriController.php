@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class KategoriController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar kategori.
      */
     public function index()
     {
@@ -19,7 +19,7 @@ class KategoriController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menambahkan kategori baru.
      */
     public function store(Request $request)
     {
@@ -31,7 +31,7 @@ class KategoriController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Memperbarui data kategori.
      */
     public function update(Request $request, $id_kategori)
     {
@@ -43,7 +43,7 @@ class KategoriController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data kategori.
      */
     public function destroy($id_kategori)
     {

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AdminManageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar admin.
      */
     public function index()
     {
@@ -18,7 +18,7 @@ class AdminManageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menambahkan admin baru dan generate password.
      */
     public function store(Request $request)
     {
@@ -33,7 +33,7 @@ class AdminManageController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Memperbarui data admin.
      */
     public function update(Request $request, $id_admin)
     {
@@ -53,7 +53,7 @@ class AdminManageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data admin.
      */
     public function destroy($id_admin)
     {
