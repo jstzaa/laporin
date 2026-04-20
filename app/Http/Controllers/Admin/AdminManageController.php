@@ -42,7 +42,7 @@ class AdminManageController extends Controller
     public function update(Request $request, $id_admin)
     {
         $validated = $request->validate([
-            'username' => 'required|max:255|unique:admins,username'
+            'username' => 'required|max:255|unique:admins,username,' . $id_admin . ',id_admin'
         ],[
             'username.unique' => 'Admin dengan username ini sudah terdaftar, masukkan username baru!'
         ]);
