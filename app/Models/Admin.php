@@ -21,7 +21,6 @@ class Admin extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
-    protected $guard = 'admin';
 
     // Relasi ke tabel aspirasi
     public function aspirasi(): HasMany

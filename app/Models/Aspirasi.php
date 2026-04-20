@@ -21,7 +21,7 @@ class Aspirasi extends Model
     ];
 
     // Relasi ke tabel input aspirasi
-    public function input_aspirasi(): BelongsTo
+    public function inputAspirasi(): BelongsTo
     {
         return $this->belongsTo(InputAspirasi::class, 'id_pelaporan', 'id_pelaporan');
     }

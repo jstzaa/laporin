@@ -21,7 +21,6 @@ class Siswa extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
-    protected $guard = 'siswa';
 
     // Relasi ke tabel input aspirasi
     public function inputAspirasi(): HasMany

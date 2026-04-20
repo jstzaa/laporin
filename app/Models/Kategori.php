@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Aspirasi;
 use App\Models\InputAspirasi;
 
 class Kategori extends Model
@@ -22,11 +21,5 @@ class Kategori extends Model
     public function inputAspirasi(): HasMany
     {
         return $this->hasMany(InputAspirasi::class, 'id_kategori', 'id_kategori');
-    }
-
-    // Relasi ke tabel aspirasi
-    public function aspirasi(): HasMany
-    {
-        return $this->hasMany(Aspirasi::class, 'id_kategori', 'id_kategori');
     }
 }
