@@ -1,7 +1,7 @@
 @extends('siswa.layout.app')
 
 @section('content')
-<div class="max-w-5xl mx-auto px-4 sm:px-6">
+<div class="max-w-5xl md:w-xl lg:w-5xl mx-auto px-4 sm:px-6">
     <div class="space-y-6">
 
         {{-- PAGE HEADER --}}
@@ -16,18 +16,6 @@
                 <h1 class="text-xl font-extrabold text-gray-800 tracking-tight">Input Laporan</h1>
                 <p class="text-xs text-gray-400 font-medium">Sampaikan keluhanmu dengan jelas dan lengkap</p>
             </div>
-        </div>
-
-        {{-- INFO BANNER --}}
-        <div class="flex items-start space-x-3 bg-primary/5 border border-primary/20 rounded-2xl px-4 py-3.5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
-            </svg>
-            <p class="text-xs text-primary font-medium leading-relaxed">
-                Identitasmu <span class="font-bold">dijaga kerahasiaannya</span>. Pastikan laporan yang kamu kirim
-                akurat dan dapat dipertanggungjawabkan.
-            </p>
         </div>
 
         {{-- SUCCESS ALERT --}}
@@ -134,13 +122,12 @@
                                          focus:border-transparent transition-all duration-150 resize-none leading-relaxed"></textarea>
                         <div class="flex items-center justify-between">
                             <p class="text-[11px] text-gray-400">Minimal 20 karakter. Jelaskan kejadian dengan sejelas mungkin.</p>
-                            <span class="text-[11px] text-gray-400 font-medium">0 / 500</span>
                         </div>
                     </div>
     
                     {{-- ── ACTION BUTTONS ── --}}
                     <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                        <button type="button"
+                        <button type="reset"
                                 class="flex-1 flex items-center justify-center space-x-2
                                        bg-gray-100 hover:bg-gray-200 text-gray-500
                                        text-sm font-semibold px-5 py-3 rounded-xl transition-all duration-150">

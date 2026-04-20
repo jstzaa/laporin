@@ -58,11 +58,15 @@
                         <p class="text-lg font-bold text-gray-700">{{ $item->kategori->ket_kategori }}</p>
                     </div>
 
-                    <span class="text-xs font-bold px-2 py-2 rounded-xl
-                        {{ $item->aspirasi?->status == 'Selesai' ? 'bg-emerald-100 text-emerald-600' : '' }}
-                        {{ $item->aspirasi?->status == 'Proses' ? 'bg-indigo-100 text-indigo-600' : '' }}
-                        {{ $item->aspirasi?->status == 'Menunggu' ? 'bg-amber-100 text-amber-600' : '' }}
-                        {{ $item->aspirasi?->status ?? 'bg-amber-100 text-amber-600' }}">
+                    @php
+                        $statusClass = match($item->aspirasi?->status) {
+                            'Selesai'  => 'bg-emerald-100 text-emerald-600',
+                            'Proses'   => 'bg-indigo-100 text-indigo-600',
+                            default    => 'bg-amber-100 text-amber-600',
+                        };
+                    @endphp
+
+                    <span class="text-xs font-bold px-2 py-2 rounded-xl {{ $statusClass }}">
                         {{ $item->aspirasi?->status ?? 'Menunggu' }}
                     </span>
                 </div>
