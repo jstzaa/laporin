@@ -17,7 +17,7 @@
             </div>
         </div>
         <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-primary/5 text-primary border border-primary/20 self-start sm:self-center">
-            {{ $laporan->count() }} Laporan Ditemukan
+            {{ $laporan->total() }} Laporan Ditemukan
         </span>
     </div>
 
@@ -147,6 +147,12 @@
                 </tbody>
             </table>
         </div>
+        {{-- Pagination --}}
+        @if ($laporan->hasPages())
+            <div class="px-5 py-4 border-t border-gray-100 bg-gray-50/50">
+                {{ $laporan->links() }}
+            </div>
+        @endif
     </div>
 </div>
 @endsection
