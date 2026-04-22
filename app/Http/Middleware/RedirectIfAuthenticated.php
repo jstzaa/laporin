@@ -17,11 +17,11 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next)
     {
         if (Auth::guard('admin')->check()) {
-            return redirect()->route('show.home.admin');
+            return redirect()->route('laporan.admin.show');
         }
 
         if (Auth::guard('siswa')->check()) {
-            return redirect()->route('show.home.siswa');
+            return redirect()->route('laporan.siswa.show');
         }
 
         return $next($request);
