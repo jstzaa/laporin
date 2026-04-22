@@ -21,7 +21,7 @@ return new class extends Migration
                 ->unique()
                 ->constrained('input_aspirasis', 'id_pelaporan')
                 ->cascadeOnDelete();
-            $table->string('feedback');
+            $table->string('feedback', 50);
             $table->timestamps();
         });
     }
