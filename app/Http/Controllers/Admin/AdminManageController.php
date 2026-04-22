@@ -53,7 +53,7 @@ class AdminManageController extends Controller
     {
         $validated = $request->validate([
             'username' => 'required|max:255|unique:admins,username,' . $id_admin . ',id_admin',
-            'password' => 'nullable|string|min:8'
+            'password' => 'nullable|min:8'
         ],[
             'username.unique' => 'Admin dengan username ini sudah terdaftar, masukkan username baru!'
         ]);

@@ -54,10 +54,10 @@ class SiswaController extends Controller
     public function update(Request $request, $id_siswa)
     {
         $validated = $request->validate([
-            'nama_siswa' => 'required|string|max:255',
-            'nis'        => 'required|string|max:255|unique:siswas,nis,' . $id_siswa . ',id_siswa',
-            'kelas'      => 'required|string|max:255',
-            'password'   => 'nullable|string|min:8'
+            'nama_siswa' => 'required|max:255',
+            'nis'        => 'required|max:255|unique:siswas,nis,' . $id_siswa . ',id_siswa',
+            'kelas'      => 'required|max:255',
+            'password'   => 'nullable|min:8'
         ],[
             'nis.unique' => 'NIS sudah digunakan, gunakan NIS yang baru!'
         ]);
