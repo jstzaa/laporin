@@ -72,7 +72,7 @@ class SiswaController extends Controller
 
         $siswa->update($validated);
 
-        return redirect()->route('show.siswa')->with('success', 'Data siswa berhasil diedit');
+        return redirect()->route('siswa.show')->with('success', 'Data siswa berhasil diedit');
     }
 
     /**

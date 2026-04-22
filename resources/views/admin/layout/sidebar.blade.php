@@ -58,7 +58,7 @@
 
             <p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400 px-3 mb-2">Menu Utama</p>
 
-            <a href="{{ route('show.home.admin') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
+            <a href="{{ route('laporan.admin.show') }}" class="{{ request()->routeIs('laporan.admin.*') ? 'bg-primary/25' : '' }} flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
                 <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary/10 flex items-center justify-center transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h13M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h4M13 7l5 5-5 5"/>
@@ -67,7 +67,7 @@
                 <span>Daftar Laporan</span>
             </a>
 
-            <a href="{{ route('show.kategori') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
+            <a href="{{ route('kategori.show') }}" class="{{ request()->routeIs('kategori.*') ? 'bg-primary/25' : '' }} flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
                 <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary/10 flex items-center justify-center transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a2 2 0 014-4z"/>
@@ -76,7 +76,7 @@
                 <span>Kategori</span>
             </a>
 
-            <a href="{{ route('show.siswa') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
+            <a href="{{ route('siswa.show') }}" class="{{ request()->routeIs('siswa.*') ? 'bg-primary/25' : '' }} flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
                 <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary/10 flex items-center justify-center transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -85,7 +85,7 @@
                 <span>Siswa</span>
             </a>
 
-            <a href="{{ route('show.admin') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
+            <a href="{{ route('admin.show') }}" class="{{ request()->routeIs('admin.*') ? 'bg-primary/25' : '' }} flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-primary/10 hover:text-primary transition-all duration-150 group">
                 <span class="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary/10 flex items-center justify-center transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0M12 2a10 10 0 100 20 10 10 0 000-20z"/>

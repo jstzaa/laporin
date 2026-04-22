@@ -28,7 +28,7 @@
             <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Filter Laporan</h2>
         </div>
         
-        <form method="GET" action="{{ route('show.home.admin') }}">
+        <form method="GET" action="{{ route('laporan.admin.show') }}">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <div class="space-y-1">
                     <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Tanggal</label>
@@ -120,7 +120,7 @@
                                     {{ $item->kategori->ket_kategori }}
                                 </p>
                             </td>
-                            <form method="POST" action="{{ route('update.laporan') }}">
+                            <form method="POST" action="{{ route('laporan.admin.update') }}">
                                 @csrf
                                 <td class="px-6 py-4">
                                     <input type="hidden" name="id_pelaporan" value="{{ $item->id_pelaporan }}">

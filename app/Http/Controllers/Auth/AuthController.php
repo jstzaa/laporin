@@ -31,7 +31,7 @@ class AuthController extends Controller
             'password' => $password
         ])){
             $request->session()->regenerate();
-            return redirect()->route('show.home.admin');
+            return redirect()->route('laporan.admin.show');
         }
 
         // Login dengan guard siswa
@@ -40,7 +40,7 @@ class AuthController extends Controller
             'password' => $password
         ])){
             $request->session()->regenerate();
-            return redirect()->route('show.home.siswa');
+            return redirect()->route('laporan.siswa.show');
         }
 
         // Jika login gagal, kembalikan dengan error

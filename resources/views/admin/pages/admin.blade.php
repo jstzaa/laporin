@@ -22,7 +22,7 @@
             <div class="w-1 h-5 bg-primary rounded-full"></div>
             <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Tambah Admin Baru</h2>
         </div>
-        <form method="POST" action="{{ route('add.admin') }}"
+        <form method="POST" action="{{ route('admin.add') }}"
               class="flex flex-col sm:flex-row gap-3">
             @csrf
             <input type="text" name="username" required
@@ -128,7 +128,7 @@
                             {{-- Aksi --}}
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-2">
-                                    <a href="{{ route('show.edit.admin', ['id' => $item->id_admin]) }}"
+                                    <a href="{{ route('admin.edit', ['id' => $item->id_admin]) }}"
                                         class="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100
                                                text-amber-600 hover:text-amber-700 text-xs font-semibold rounded-lg
                                                border border-amber-200 transition-all duration-150">

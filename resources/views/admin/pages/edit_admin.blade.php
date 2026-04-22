@@ -6,7 +6,7 @@
 
         {{-- BREADCRUMB --}}
         <div class="flex items-center space-x-2 text-xs text-gray-400 font-medium">
-            <a href="{{ route('show.admin') }}" class="hover:text-blue-600 transition">Admin</a>
+            <a href="{{ route('admin.show') }}" class="hover:text-blue-600 transition">Admin</a>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
             </svg>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('update.admin', $admin->id_admin) }}" class="space-y-5">
+                <form method="POST" action="{{ route('admin.update', $admin->id_admin) }}" class="space-y-5">
                     @method('PUT')
                     @csrf
 
@@ -128,7 +128,7 @@
 
                     {{-- Action Buttons --}}
                     <div class="flex flex-col sm:flex-row gap-3 pt-2 border-t border-gray-100 mt-6">
-                        <a href="{{ route('show.admin') }}"
+                        <a href="{{ route('admin.show') }}"
                            class="flex-1 flex items-center justify-center space-x-2
                                   bg-gray-100 hover:bg-gray-200 text-gray-500
                                   text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-150">

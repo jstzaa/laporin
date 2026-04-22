@@ -68,7 +68,7 @@ class AdminManageController extends Controller
 
         $admin->update($validated);
 
-        return redirect()->route('show.admin')->with('success', 'Data admin berhasil diedit');
+        return redirect()->route('admin.show')->with('success', 'Data admin berhasil diedit');
     }
 
     /**

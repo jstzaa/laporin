@@ -33,7 +33,7 @@
         @endif
 
         {{-- FORM CARD --}}
-        <form method="POST" action="{{ route('add.laporan') }}">
+        <form method="POST" action="{{ route('laporan.siswa.add') }}">
             @csrf
             <div class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
     

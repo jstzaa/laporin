@@ -22,7 +22,7 @@
             <div class="w-1 h-5 bg-primary rounded-full"></div>
             <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Tambah Siswa Baru</h2>
         </div>
-        <form method="POST" action="{{ route('add.siswa') }}" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+        <form method="POST" action="{{ route('siswa.add') }}" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
             @csrf
             <input type="text" name="nama_siswa" placeholder="Nama siswa" required value="{{ old('nama_siswa') }}"
                    class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 
@@ -129,7 +129,7 @@
                             {{-- Aksi --}}
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-2">
-                                    <a href="{{ route('show.edit.siswa', ['id' => $item->id_siswa]) }}"
+                                    <a href="{{ route('siswa.edit', ['id' => $item->id_siswa]) }}"
                                         class="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-600 text-xs font-semibold rounded-lg border border-amber-200 transition-all">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
