@@ -52,21 +52,21 @@ Sistem dirancang dengan **dua peran terpisah** menggunakan Laravel Multi-Guard A
 <table>
   <tr>
     <td align="center">
-      <img src="/screenshots/laporan.png" alt="Daftar Laporan" width="100%"/>
+      <img src="public/screenshots/laporan.png" alt="Daftar Laporan" width="100%"/>
       <br/><sub><b>Daftar Laporan</b></sub>
     </td>
     <td align="center">
-      <img src="/screenshots/kategori.png" alt="Manajemen Kategori" width="100%"/>
+      <img src="public/screenshots/kategori.png" alt="Manajemen Kategori" width="100%"/>
       <br/><sub><b>Manajemen Kategori</b></sub>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="/screenshots/siswa.png" alt="Manajemen Siswa" width="100%"/>
+      <img src="public/screenshots/siswa.png" alt="Manajemen Siswa" width="100%"/>
       <br/><sub><b>Manajemen Siswa</b></sub>
     </td>
     <td align="center">
-      <img src="/screenshots/admin.png" alt="Manajemen Admin" width="100%"/>
+      <img src="public/screenshots/admin.png" alt="Manajemen Admin" width="100%"/>
       <br/><sub><b>Manajemen Admin</b></sub>
     </td>
   </tr>
@@ -76,11 +76,11 @@ Sistem dirancang dengan **dua peran terpisah** menggunakan Laravel Multi-Guard A
 <table>
   <tr>
     <td align="center">
-      <img src="/screenshots/input.png" alt="Input Laporan" width="100%"/>
+      <img src="public/screenshots/input.png" alt="Input Laporan" width="100%"/>
       <br/><sub><b>Input Laporan</b></sub>
     </td>
     <td align="center">
-      <img src="/screenshots/history.png" alt="Riwayat Laporan" width="100%"/>
+      <img src="public/screenshots/history.png" alt="Riwayat Laporan" width="100%"/>
       <br/><sub><b>Riwayat Laporan & Feedback</b></sub>
     </td>
   </tr>
