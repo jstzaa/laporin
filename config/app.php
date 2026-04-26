@@ -123,4 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'student_password_suffix' => env('STUDENT_PASSWORD_SUFFIX', '@siswa.sch.id'),
+    'admin_password_suffix' => env('ADMIN_PASSWORD_SUFFIX', '@laporin.sch.id'),
+
 ];

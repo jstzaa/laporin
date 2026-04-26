@@ -24,15 +24,14 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_siswa' => 'required|max:255',
-            'nis' => 'required|max:255|unique:siswas,nis',
-            'kelas' => 'required|max:255',
+            'nama_siswa' => 'required|max:50',
+            'nis' => 'required|max:10|unique:siswas,nis',
+            'kelas' => 'required|max:10',
         ],[
             'nis.unique' => 'NIS sudah digunakan, gunakan NIS yang baru!'
         ]);
 
-        $rawPassword = $request->nis . '@siswa.sch.id';
-        $validated['password'] = $rawPassword;
+        $validated['password'] = $request->nis . config('app.student_password_suffix');
 
         Siswa::create($validated);
 
@@ -54,9 +53,9 @@ class SiswaController extends Controller
     public function update(Request $request, $id_siswa)
     {
         $validated = $request->validate([
-            'nama_siswa' => 'required|max:255',
-            'nis'        => 'required|max:255|unique:siswas,nis,' . $id_siswa . ',id_siswa',
-            'kelas'      => 'required|max:255',
+            'nama_siswa' => 'required|max:50',
+            'nis'        => 'required|max:10|unique:siswas,nis,' . $id_siswa . ',id_siswa',
+            'kelas'      => 'required|max:10',
             'password'   => 'nullable|min:8'
         ],[
             'nis.unique' => 'NIS sudah digunakan, gunakan NIS yang baru!'

@@ -40,7 +40,7 @@ class AspirasiController extends Controller
     {
         $request->validate([
             'status' => 'required|in:Menunggu,Proses,Selesai',
-            'feedback' => 'required|max:255',
+            'feedback' => 'required|max:50',
             'id_pelaporan' => 'required|exists:input_aspirasis,id_pelaporan'
         ]);
 

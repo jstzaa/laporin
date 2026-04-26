@@ -24,13 +24,12 @@ class AdminManageController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'username' => 'required|max:255|unique:admins,username'
+            'username' => 'required|max:20|unique:admins,username'
         ],[
             'username.unique' => 'Admin dengan username ini sudah terdaftar, masukkan username baru!'
         ]);
 
-        $rawPassword = $request->username . '@laporin.sch.id';
-        $validated['password'] = $rawPassword;
+        $validated['password'] = $request->username . config('app.admin_password_suffix');
 
         Admin::create($validated);
 
@@ -52,7 +51,7 @@ class AdminManageController extends Controller
     public function update(Request $request, $id_admin)
     {
         $validated = $request->validate([
-            'username' => 'required|max:255|unique:admins,username,' . $id_admin . ',id_admin',
+            'username' => 'required|max:20|unique:admins,username,' . $id_admin . ',id_admin',
             'password' => 'nullable|min:8'
         ],[
             'username.unique' => 'Admin dengan username ini sudah terdaftar, masukkan username baru!'

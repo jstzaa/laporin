@@ -23,7 +23,7 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(['ket_kategori' => 'required|max:255']);
+        $validated = $request->validate(['ket_kategori' => 'required|max:30']);
 
         Kategori::create($validated);
 
@@ -45,7 +45,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id_kategori)
     {
-        $validated = $request->validate(['ket_kategori' => 'required|max:255']);
+        $validated = $request->validate(['ket_kategori' => 'required|max:30']);
 
         Kategori::findOrFail($id_kategori)->update($validated);
 

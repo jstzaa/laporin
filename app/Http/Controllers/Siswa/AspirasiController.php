@@ -39,8 +39,8 @@ class AspirasiController extends Controller
     {
         $request->validate([
             'kategori' => 'required|exists:kategoris,id_kategori',
-            'lokasi' => 'required|max:255',
-            'keterangan' => 'required'
+            'lokasi' => 'required|max:50',
+            'keterangan' => 'required|max:50'
         ]);
 
         InputAspirasi::create([
