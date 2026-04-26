@@ -3,10 +3,11 @@
 # 📣 Laporin!
 ### Sistem Pengaduan & Aspirasi Siswa Berbasis Web
 
-[![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![Alpine.js](https://img.shields.io/badge/Alpine.js-3-8BC0D0?style=flat-square&logo=alpine.js&logoColor=white)](https://alpinejs.dev)
-[![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://mysql.com)
+[![Laravel](https://img.shields.io/badge/Laravel-13.4.0-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2.2-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Alpine.js](https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?style=flat-square&logo=alpine.js&logoColor=white)](https://alpinejs.dev)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0.30-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://mysql.com)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
 Aplikasi web untuk menyederhanakan penyampaian aspirasi dan pengaduan siswa di lingkungan sekolah — dari pengiriman laporan hingga tindak lanjut oleh admin, semua dalam satu platform.
 
@@ -41,6 +42,49 @@ Sistem dirancang dengan **dua peran terpisah** menggunakan Laravel Multi-Guard A
 | Kirim Aspirasi | Menyampaikan pengaduan atau aspirasi secara digital |
 | Riwayat Laporan | Memantau status tindak lanjut laporan yang dikirim |
 | Lihat Feedback | Melihat respons dari admin atas laporan yang dikirim |
+
+---
+
+## 📸 Tampilan Aplikasi
+ 
+### 👨‍💼 Sisi Admin
+ 
+<table>
+  <tr>
+    <td align="center">
+      <img src="public/screenshots/laporan.png" alt="Daftar Laporan" width="100%"/>
+      <br/><sub><b>Daftar Laporan</b></sub>
+    </td>
+    <td align="center">
+      <img src="public/screenshots/kategori.png" alt="Manajemen Kategori" width="100%"/>
+      <br/><sub><b>Manajemen Kategori</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="public/screenshots/siswa.png" alt="Manajemen Siswa" width="100%"/>
+      <br/><sub><b>Manajemen Siswa</b></sub>
+    </td>
+    <td align="center">
+      <img src="public/screenshots/admin.png" alt="Manajemen Admin" width="100%"/>
+      <br/><sub><b>Manajemen Admin</b></sub>
+    </td>
+  </tr>
+</table>
+### 🧑‍🎓 Sisi Siswa
+ 
+<table>
+  <tr>
+    <td align="center">
+      <img src="public/screenshots/input.png" alt="Input Laporan" width="100%"/>
+      <br/><sub><b>Input Laporan</b></sub>
+    </td>
+    <td align="center">
+      <img src="public/screenshots/history.png" alt="Riwayat Laporan" width="100%"/>
+      <br/><sub><b>Riwayat Laporan & Feedback</b></sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
