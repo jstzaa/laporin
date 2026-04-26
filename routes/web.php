@@ -40,7 +40,7 @@ Route::middleware('auth:siswa')->group(function(){
     
 Route::middleware('guest.multi')->group(function(){
     Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login')->middleware('throttle:login');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth:admin,siswa');
