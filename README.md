@@ -1,58 +1,153 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 📣 Laporin!
+### Sistem Pengaduan & Aspirasi Siswa Berbasis Web
 
-## About Laravel
+[![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Alpine.js](https://img.shields.io/badge/Alpine.js-3-8BC0D0?style=flat-square&logo=alpine.js&logoColor=white)](https://alpinejs.dev)
+[![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://mysql.com)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Aplikasi web untuk menyederhanakan penyampaian aspirasi dan pengaduan siswa di lingkungan sekolah — dari pengiriman laporan hingga tindak lanjut oleh admin, semua dalam satu platform.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+</div>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📌 Tentang Proyek
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Laporin!** dibangun sebagai proyek UKK (Uji Kompetensi Keahlian) sekaligus portfolio pribadi. Proyek ini lahir dari kebutuhan nyata di lingkungan sekolah — menyediakan saluran aspirasi siswa yang terstruktur, terdokumentasi, dan mudah ditindaklanjuti oleh pihak sekolah.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Sistem dirancang dengan **dua peran terpisah** menggunakan Laravel Multi-Guard Authentication, memastikan data dan akses admin serta siswa tidak saling bercampur.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## ✨ Fitur Utama
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 👨‍💼 Admin
+| Fitur | Deskripsi |
+|---|---|
+| Dashboard Laporan | Melihat seluruh laporan aspirasi siswa secara terpusat |
+| Filter & Pencarian | Filter laporan berdasarkan kategori dan tanggal |
+| Manajemen Status | Update status laporan: `Menunggu` → `Proses` → `Selesai` |
+| Feedback | Memberikan respons/tindak lanjut pada setiap laporan |
+| Manajemen Kategori | Kelola kategori aspirasi yang tersedia |
+| Manajemen Siswa | Tambah, edit, dan hapus data siswa |
+| Manajemen Admin | Kelola akun admin lainnya |
+
+### 🧑‍🎓 Siswa
+| Fitur | Deskripsi |
+|---|---|
+| Kirim Aspirasi | Menyampaikan pengaduan atau aspirasi secara digital |
+| Riwayat Laporan | Memantau status tindak lanjut laporan yang dikirim |
+| Lihat Feedback | Melihat respons dari admin atas laporan yang dikirim |
+
+---
+
+## 🛠️ Teknologi
+
+| Kategori | Teknologi |
+|---|---|
+| Backend | Laravel 13, PHP |
+| Frontend | Tailwind CSS, Alpine.js, Vite |
+| Database | MySQL |
+| Auth | Laravel Multi-Guard Authentication |
+| Version Control | Git, GitHub |
+
+---
+
+## ⚙️ Instalasi
+
+### Prasyarat
+- PHP >= 8.2
+- Composer
+- Node.js & NPM
+- MySQL
+
+### Langkah Instalasi
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clone repository
+git clone https://github.com/jstzaa/laporin.git
+cd laporin
 
-php artisan boost:install
+# 2. Install dependencies
+composer install
+npm install
+
+# 3. Konfigurasi environment
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Sesuaikan konfigurasi database di file `.env`:
+```env
+DB_DATABASE=laporin
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Contributing
+```bash
+# 4. Migrasi dan seed data demo
+php artisan migrate --seed
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# 5. Jalankan aplikasi
+npm run dev          # development
+php artisan serve
+```
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🔐 Akun Demo
 
-## Security Vulnerabilities
+Seed data tersedia untuk keperluan testing dan demo fitur.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Admin**
+```
+Username : admin1
+Password : 12345678
+```
 
-## License
+**Siswa**
+```
+NIS      : 1234567890
+Password : 12345678
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> ⚠️ Akun demo hanya untuk keperluan development/testing. Ganti kredensial sebelum deployment ke production.
+
+---
+
+## 🏗️ Arsitektur
+
+```
+Laporin!
+├── Multi-Guard Auth      → Admin & Siswa memiliki guard, tabel, dan session terpisah
+├── Role-based Routing    → Proteksi route berdasarkan guard middleware
+├── Password Hashing      → Otomatis via $casts di Model (bcrypt)
+└── Seed Data             → Data demo siap pakai untuk testing
+```
+
+---
+
+## 📝 Catatan
+
+- Proyek ini belum menggunakan data real dan tidak ditujukan untuk deployment production.
+- Password generation menggunakan pola `{NIS}@siswa.sch.id` dan di-hash otomatis oleh model.
+- Untuk penggunaan production, sesuaikan aturan password, seed data, dan konfigurasi environment.
+
+---
+
+## 👨‍💻 Author
+
+**Fahriza Kurniawan**
+- GitHub: [@jstzaa](https://github.com/jstzaa)
+- Portfolio: [zaa-dev.my.id](https://www.zaa-dev.my.id)
+
+---
+
+<div align="center">
+
+Dibuat dengan ❤️ sebagai proyek UKK & portfolio — SMK Al-Khoeriyah Kota Tasikmalaya
+
+</div>
