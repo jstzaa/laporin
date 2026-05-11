@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,12 +15,9 @@ class AuthController extends Controller
     }
 
     // Fungsi login
-    public function login(Request $request){
+    public function login(AuthRequest $request){
         // Validasi input
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required|min:8'
-        ]);
+        $request->validated();
 
         // Menyimpan input validasi
         $username = $request->username;
